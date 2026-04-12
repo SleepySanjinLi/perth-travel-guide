@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西澳珀斯北线5日终极攻略（优化版）| Perth North Coast Adventure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ocean-deep: #1a365d;
+            --ocean-mid: #2c5282;
+            --ocean-light: #4299e1;
+            --sunset-gold: #ed8936;
+            --sunset-pink: #ed64a6;
+            --desert-sand: #f6e05e;
+            --coral: #fc8181;
+            --forest: #38a169;
+            --cloud: #f7fafc;
+            --stone: #2d3748;
+            --shadow: #1a202c;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans SC', sans-serif; color: var(--stone); line-height: 1.8; background: var(--cloud); }
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-mid) 40%, var(--sunset-gold) 100%); overflow: hidden; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1548586196-aa5803b77379?w=1920&q=80') center/cover; opacity: 0.3; mix-blend-mode: overlay; }
+        .hero-content { position: relative; z-index: 2; text-align: center; color: white; padding: 2rem; }
+        .hero h1 { font-family: 'Noto Serif SC', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; margin-bottom: 1rem; text-shadow: 2px 4px 8px rgba(0,0,0,0.3); }
+        .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.5rem); font-weight: 300; opacity: 0.95; max-width: 700px; margin: 0 auto 2rem; }
+        .hero-meta { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+        .meta-badge { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 0.75rem 1.5rem; border-radius: 50px; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.3); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .overview { background: white; border-radius: 24px; padding: 3rem; margin: -4rem 2rem 4rem; position: relative; z-index: 10; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .overview h2 { font-family: 'Noto Serif SC', serif; font-size: 2rem; color: var(--ocean-deep); margin-bottom: 2rem; text-align: center; }
+        .route-visual { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin: 2rem 0; }
+        .route-day { flex: 1; min-width: 140px; text-align: center; padding: 1.5rem 1rem; background: linear-gradient(135deg, var(--ocean-light), var(--ocean-mid)); border-radius: 16px; color: white; }
+        .route-day .day-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; }
+        .route-day .day-label { font-size: 0.85rem; opacity: 0.9; margin-top: 0.5rem; }
+        .route-arrow { font-size: 1.5rem; color: var(--sunset-gold); font-weight: bold; }
+        .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .highlight-card { background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 16px; padding: 1.5rem; border-left: 4px solid var(--sunset-gold); }
+        .highlight-card h4 { color: var(--ocean-deep); margin-bottom: 0.5rem; }
+        .highlight-card p { font-size: 0.9rem; color: #666; }
+        .day-section { background: white; border-radius: 24px; margin: 3rem 2rem; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .day-header { position: relative; height: 400px; overflow: hidden; }
+        .day-header img { width: 100%; height: 100%; object-fit: cover; }
+        .day-header-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem; color: white; }
+        .day-number { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 700; line-height: 1; opacity: 0.3; position: absolute; top: 2rem; right: 3rem; }
+        .day-header h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .day-route { font-size: 1rem; opacity: 0.9; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .day-content { padding: 3rem; }
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--ocean-light), var(--sunset-gold), var(--coral)); border-radius: 2px; }
+        .timeline-item { position: relative; margin-bottom: 2.5rem; padding-left: 1.5rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -2.35rem; top: 0.5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--sunset-gold); border: 3px solid white; box-shadow: 0 0 0 3px var(--ocean-light); }
+        .time-badge { display: inline-block; background: var(--ocean-deep); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .timeline-item h3 { font-family: 'Noto Serif SC', serif; font-size: 1.3rem; color: var(--ocean-deep); margin-bottom: 0.75rem; }
+        .timeline-item p { color: #555; margin-bottom: 1rem; }
+        .info-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .info-card { background: #f8f9fa; border-radius: 12px; padding: 1rem; display: flex; align-items: flex-start; gap: 0.75rem; }
+        .info-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .info-card h4 { font-size: 0.85rem; color: var(--ocean-deep); margin-bottom: 0.25rem; }
+        .info-card p { font-size: 0.8rem; color: #666; margin: 0; }
+        .photo-spots { background: linear-gradient(135deg, #fff5f5, #fed7d7); border-radius: 16px; padding: 1.5rem; margin-top: 1.5rem; }
+        .photo-spots h4 { color: var(--coral); margin-bottom: 1rem; }
+        .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.75rem; }
+        .photo-item { background: white; border-radius: 8px; padding: 0.75rem; font-size: 0.85rem; text-align: center; }
+        .photo-item .emoji { font-size: 1.5rem; display: block; margin-bottom: 0.25rem; }
+        .tips-box { background: linear-gradient(135deg, #fffff0, #fefcbf); border-radius: 16px; padding: 1.5rem; margin-top: 1.5rem; border-left: 4px solid var(--desert-sand); }
+        .tips-box h4 { color: #975a16; margin-bottom: 0.75rem; }
+        .tips-box ul { list-style: none; padding: 0; }
+        .tips-box li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; font-size: 0.9rem; }
+        .tips-box li::before { content: '💡'; position: absolute; left: 0; }
+        .nav-link { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--ocean-deep); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-size: 0.85rem; margin-top: 0.5rem; transition: background 0.3s; }
+        .nav-link:hover { background: var(--ocean-mid); }
+        .route-map-box { background: linear-gradient(135deg, #ebf8ff, #bee3f8); border-radius: 16px; padding: 1.5rem; margin: 1.5rem 0; border-left: 4px solid var(--ocean-light); }
+        .route-map-box h4 { color: var(--ocean-deep); margin-bottom: 0.75rem; }
+        .route-segment { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px dashed #bee3f8; font-size: 0.9rem; }
+        .route-segment:last-child { border-bottom: none; }
+        .route-segment .from-to { flex: 1; }
+        .route-segment .distance { color: var(--ocean-mid); font-weight: 500; white-space: nowrap; }
+        .route-segment .time { color: #666; font-size: 0.8rem; }
+        .gallery-section { background: var(--ocean-deep); color: white; padding: 4rem 2rem; margin: 4rem 0; }
+        .gallery-section h2 { font-family: 'Noto Serif SC', serif; font-size: 2rem; text-align: center; margin-bottom: 3rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .gallery-item { position: relative; height: 250px; border-radius: 16px; overflow: hidden; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
+        .gallery-caption h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .gallery-caption p { font-size: 0.85rem; opacity: 0.8; }
+        .packing-section { background: white; border-radius: 24px; padding: 3rem; margin: 3rem 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .packing-section h2 { font-family: 'Noto Serif SC', serif; font-size: 2rem; color: var(--ocean-deep); text-align: center; margin-bottom: 2rem; }
+        .budget-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+        .budget-table th, .budget-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        .budget-table th { background: var(--ocean-deep); color: white; }
+        .summary-table { width: 100%; border-collapse: collapse; margin: 2rem 0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .summary-table thead th { background: linear-gradient(135deg, var(--ocean-deep), var(--ocean-mid)); color: white; padding: 1rem 0.75rem; font-size: 0.85rem; font-weight: 500; text-align: center; white-space: nowrap; }
+        .summary-table tbody td { padding: 0.85rem 0.75rem; border-bottom: 1px solid #edf2f7; font-size: 0.85rem; vertical-align: top; }
+        .summary-table tbody tr:nth-child(even) { background: #f8fafc; }
+        .summary-table tbody tr:hover { background: #ebf8ff; }
+        .summary-table .day-badge { display: inline-block; background: var(--sunset-gold); color: white; padding: 0.15rem 0.6rem; border-radius: 12px; font-weight: 700; font-size: 0.75rem; margin-right: 0.4rem; }
+        .summary-table .km { color: var(--ocean-mid); font-weight: 500; }
+        .summary-table .hotel { color: var(--forest); font-weight: 500; }
+        .plan-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 3rem 0; }
+        .plan-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
+        .plan-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+        .plan-card.recommended { border: 3px solid var(--sunset-gold); }
+        .plan-header { padding: 2rem; text-align: center; color: white; }
+        .plan-card:first-child .plan-header { background: linear-gradient(135deg, var(--ocean-deep), var(--ocean-mid)); }
+        .plan-card:last-child .plan-header { background: linear-gradient(135deg, #6b46c1, #9f7aea); }
+        .plan-header h3 { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .plan-header .plan-tag { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.8rem; margin-top: 0.5rem; }
+        .plan-body { padding: 1.5rem 2rem 2rem; }
+        .plan-body h4 { color: var(--ocean-deep); margin-bottom: 0.75rem; font-size: 1rem; }
+        .plan-day { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #edf2f7; }
+        .plan-day:last-child { border-bottom: none; }
+        .plan-day .num { background: var(--ocean-light); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+        .plan-day .desc { font-size: 0.85rem; }
+        .plan-day .desc strong { color: var(--ocean-deep); }
+        .plan-pros { margin-top: 1rem; }
+        .plan-pros li { list-style: none; font-size: 0.85rem; padding: 0.3rem 0; padding-left: 1.5rem; position: relative; }
+        .plan-pros li::before { content: '✅'; position: absolute; left: 0; }
+        .plan-cons li { list-style: none; font-size: 0.85rem; padding: 0.3rem 0; padding-left: 1.5rem; position: relative; }
+        .plan-cons li::before { content: '⚠️'; position: absolute; left: 0; }
+        .citywalk-timeline { position: relative; padding-left: 2rem; margin: 1.5rem 0; }
+        .citywalk-timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, #6b46c1, #9f7aea, var(--sunset-gold)); border-radius: 2px; }
+        .cw-item { position: relative; margin-bottom: 1.5rem; padding-left: 1rem; }
+        .cw-item::before { content: ''; position: absolute; left: -1.85rem; top: 0.4rem; width: 10px; height: 10px; border-radius: 50%; background: #9f7aea; border: 2px solid white; box-shadow: 0 0 0 2px #6b46c1; }
+        .cw-item .cw-time { font-size: 0.8rem; color: #6b46c1; font-weight: 600; }
+        .cw-item .cw-place { font-size: 0.95rem; color: var(--stone); margin: 0.25rem 0; }
+        .cw-item .cw-desc { font-size: 0.8rem; color: #666; }
+        @media (max-width: 768px) {
+            .plan-compare { grid-template-columns: 1fr; }
+            .packing-grid { grid-template-columns: 1fr 1fr; }
+            .day-header { height: 300px; }
+            .day-content { padding: 2rem 1.5rem; }
+            .overview { padding: 2rem 1.5rem; margin: -2rem 1rem 2rem; }
+            .day-section { margin: 2rem 1rem; }
+            .route-visual { flex-direction: column; }
+            .route-arrow { transform: rotate(90deg); }
+        }
+        .packing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+        .packing-category { background: #f8f9fa; border-radius: 12px; padding: 1.5rem; }
+        .packing-category h3 { color: var(--ocean-deep); margin-bottom: 1rem; }
+        .packing-list { list-style: none; padding: 0; }
+        .packing-list li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.9rem; }
+        .packing-list li::before { content: '☐'; position: absolute; left: 0; color: var(--ocean-light); }
+        .footer { background: var(--shadow); color: white; padding: 3rem 2rem; text-align: center; }
+        .footer p { opacity: 0.7; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>西澳珀斯北线</h1>
+            <p class="subtitle">5日终极自驾攻略（优化版）· 罗特内斯特岛Day1 · 一路向北不回头</p>
+            <div class="hero-meta">
+                <span class="meta-badge">🚗 总里程 1,200km</span>
+                <span class="meta-badge">📅 5天4晚</span>
+                <span class="meta-badge">⭐ 网红全覆盖</span>
+                <span class="meta-badge">🏝️ 岛玩Day1不赶路</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="overview">
+            <h2>📍 优化版行程总览</h2>
+            <p style="text-align:center; color: var(--coral); margin-bottom: 1.5rem; font-weight: 500;">✨ 核心优化：罗特内斯特岛放Day1，Day5纯开车返程赶航班，再无时间压力</p>
+            <div class="route-visual">
+                <div class="route-day"><div class="day-num">01</div><div class="day-label">微笑袋鼠<br><small>全天玩岛</small></div></div>
+                <div class="route-arrow">→</div>
+                <div class="route-day"><div class="day-num">02</div><div class="day-label">袋熊 & 银河<br><small>北上石阵</small></div></div>
+                <div class="route-arrow">→</div>
+                <div class="route-day"><div class="day-num">03</div><div class="day-label">海狮 & 龙虾<br><small>粉红湖</small></div></div>
+                <div class="route-arrow">→</div>
+                <div class="route-day"><div class="day-num">04</div><div class="day-label">峡谷 & 绝壁<br><small>南下兰斯林</small></div></div>
+                <div class="route-arrow">→</div>
+                <div class="route-day"><div class="day-num">05</div><div class="day-label">白沙丘晨游<br><small>完美收官</small></div></div>
+            </div>
+            <h3 style="text-align:center; color: var(--ocean-deep); margin: 2rem 0 1rem; font-family: 'Noto Serif SC', serif;">📋 5日行程总览</h3>
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>路线</th>
+                        <th>核心景点</th>
+                        <th>车程</th>
+                        <th>住宿</th>
+                        <th>亮点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="day-badge">Day1</span></td>
+                        <td>珀斯 → 罗特内斯特岛</td>
+                        <td>Quokka合影、浮潜、自行车环岛、白沙滩</td>
+                        <td class="km">几乎无</td>
+                        <td class="hotel">珀斯 CBD</td>
+                        <td>全天纯玩不赶路</td>
+                    </tr>
+                    <tr>
+                        <td><span class="day-badge">Day2</span></td>
+                        <td>珀斯 → 凯维森 → 兰斯林 → 塞万提斯</td>
+                        <td>袋熊互动、白沙丘滑沙、尖峰石阵日落</td>
+                        <td class="km">240km / 4h</td>
+                        <td class="hotel">塞万提斯</td>
+                        <td>夜观银河</td>
+                    </tr>
+                    <tr>
+                        <td><span class="day-badge">Day3</span></td>
+                        <td>塞万提斯 → 朱里恩湾 → 粉红湖 → 卡尔巴里</td>
+                        <td>龙虾工厂、海狮共游、赫特泻湖粉红湖</td>
+                        <td class="km">355km / 4.5h</td>
+                        <td class="hotel">卡尔巴里</td>
+                        <td>粉红湖打卡</td>
+                    </tr>
+                    <tr>
+                        <td><span class="day-badge">Day4</span></td>
+                        <td>卡尔巴里 → 国家公园 → 兰斯林</td>
+                        <td>自然之窗、天空之桥、海岸红崖</td>
+                        <td class="km">305km / 4.5h</td>
+                        <td class="hotel">兰斯林</td>
+                        <td>为Day5赶航班做准备</td>
+                    </tr>
+                    <tr>
+                        <td><span class="day-badge">Day5</span></td>
+                        <td>兰斯林 → 珀斯机场</td>
+                        <td>白沙丘晨游、印度洋公路返程</td>
+                        <td class="km">120km / 1.5h</td>
+                        <td class="hotel">—</td>
+                        <td>18:25航班，14:30出发即可</td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, #ebf8ff, #bee3f8); font-weight: 600;">
+                        <td colspan="3" style="text-align: right;">总计</td>
+                        <td class="km">~1,020km / ~14.5h</td>
+                        <td class="hotel">4晚</td>
+                        <td>一路向北不回头</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlights-grid">
+                <div class="highlight-card"><h4>🏝️ Day1 罗特内斯特岛</h4><p>全天纯玩Quokka、浮潜、自行车环岛，住珀斯无压力</p></div>
+                <div class="highlight-card"><h4>🦘 Day2 北线出发</h4><p>凯维森动物园→兰斯林滑沙→尖峰石阵日落→夜观银河</p></div>
+                <div class="highlight-card"><h4>🦞 Day3 海岸美食</h4><p>龙虾工厂大餐→海狮共游→粉红湖打卡→住卡尔巴里</p></div>
+                <div class="highlight-card"><h4>🪨 Day4 峡谷+南下</h4><p>自然之窗→天空之桥→海岸红崖→住兰斯林</p></div>
+                <div class="highlight-card"><h4>✈️ Day5 完美收官</h4><p>白沙丘晨游→120km轻松返程→18:25航班不赶路</p></div>
+                <div class="highlight-card"><h4>🌊 优化亮点</h4><p>Day5不再有岛上行赶飞机压力，北线一路向北极致顺路</p></div>
+            </div>
+        </section>
+
+        <!-- ========== DAY 1: ROTTNEST ISLAND ========== -->
+        <article class="day-section">
+            <div class="day-header">
+                <img src="https://images.unsplash.com/photo-1548586196-aa5803b77379?w=1200&q=80" alt="罗特内斯特岛">
+                <div class="day-header-overlay">
+                    <div class="day-number">01</div>
+                    <h2>罗特内斯特岛 Rottnest Island</h2>
+                    <div class="day-route">
+                        <span>😊 微笑袋鼠</span><span>•</span><span>🚴 自行车环岛</span><span>•</span><span>🤿 浮潜</span><span>•</span><span>🏖️ 白沙滩</span>
+                    </div>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="tips-box" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, #e6fffa, #b2f5ea); border-left-color: var(--forest);">
+                    <h4 style="color: #22543d;">✨ 优化亮点</h4>
+                    <ul>
+                        <li>全天纯玩岛，不用赶飞机，想怎么玩就怎么玩</li>
+                        <li>晚上住珀斯市区，为次日北线出发养精蓄锐</li>
+                        <li>早班船人少，Quokka早上最活跃</li>
+                    </ul>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 8:00 - 9:00</span>
+                        <h3>轮渡上岛 Fremantle/Hillarys Boat Harbour</h3>
+                        <p>从弗里曼特尔或 Hillarys 码头乘坐轮渡前往罗特内斯特岛，航程约45分钟。建议提前在线购票，早班船人少体验好。岛上禁止私家车，是印度洋上的世外桃源。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🎫</span><div><h4>轮渡费用</h4><p>往返约 $80-100 AUD</p></div></div>
+                            <div class="info-card"><span class="info-icon">⛴️</span><div><h4>轮渡时长</h4><p>约 45 分钟</p></div></div>
+                            <div class="info-card"><span class="info-icon">📅</span><div><h4>建议</h4><p>提前1-2周订票</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Fremantle+Boat+Harbour+Rottnest+Express" target="_blank" class="nav-link">📍 导航：Fremantle 码头</a>
+                        <a href="https://maps.google.com/?q=Hillarys+Boat+Harbour+Rottnest+Express" target="_blank" class="nav-link">📍 导航：Hillarys 码头</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">全天 9:30 - 16:00</span>
+                        <h3>罗特内斯特岛深度探索（全天畅玩版）</h3>
+                        <p>全天约6.5小时岛上时间，可以悠闲玩遍所有精华景点。租自行车环岛是最推荐的方式，63个绝美海滩任你探索。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🚲</span><div><h4>交通方式</h4><p>租自行车（约 $30-40/天）</p></div></div>
+                            <div class="info-card"><span class="info-icon">😊</span><div><h4>Quokka 合影</h4><p>游客中心区域最容易遇到</p></div></div>
+                            <div class="info-card"><span class="info-icon">🤿</span><div><h4>浮潜圣地</h4><p>The Basin, Little Salmon Bay</p></div></div>
+                        </div>
+                        <div class="photo-spots">
+                            <h4>📸 必打卡项目</h4>
+                            <div class="photo-grid">
+                                <div class="photo-item"><span class="emoji">😊</span>与 Quokka 自拍</div>
+                                <div class="photo-item"><span class="emoji">🤿</span>The Basin 浮潜</div>
+                                <div class="photo-item"><span class="emoji">🏖️</span>白沙滩海岛大片</div>
+                                <div class="photo-item"><span class="emoji">🚴</span>沿海骑行</div>
+                                <div class="photo-item"><span class="emoji">🐠</span>热带鱼珊瑚</div>
+                                <div class="photo-item"><span class="emoji">🌅</span>悬崖步道</div>
+                            </div>
+                        </div>
+                        <div class="tips-box">
+                            <h4>岛上提示</h4>
+                            <ul>
+                                <li>严禁喂食 Quokka，保持1-2米距离，违规罚款 $300</li>
+                                <li>岛上物价较高，自带水和零食</li>
+                                <li>The Basin 浮潜建议自带面镜更卫生</li>
+                                <li>涂防晒霜，穿舒适运动鞋骑行</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 16:30 - 17:30</span>
+                        <h3>🌅 轮渡返回珀斯</h3>
+                        <p>悠闲坐轮渡回珀斯，晚上在弗里曼特尔吃晚餐、逛夜市，完美的一天。</p>
+                    </div>
+                </div>
+                <div class="info-cards" style="margin-top: 2rem;">
+                    <div class="info-card"><span class="info-icon">🏨</span><div><h4>住宿</h4><p>珀斯 CBD，为次日北线做准备</p></div></div>
+                    <div class="info-card"><span class="info-icon">🚗</span><div><h4>今日车程</h4><p>仅码头往返，几乎无长途驾驶</p></div></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ========== DAY 2: PERTH TO CERVANTES ========== -->
+        <article class="day-section">
+            <div class="day-header">
+                <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=1200&q=80" alt="尖峰石阵">
+                <div class="day-header-overlay">
+                    <div class="day-number">02</div>
+                    <h2>珀斯 → 凯维森 → 兰斯林 → 塞万提斯</h2>
+                    <div class="day-route">
+                        <span>🦘 袋熊互动</span><span>•</span><span>🏜️ 白沙丘滑沙</span><span>•</span><span>🌌 银河观星</span>
+                    </div>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 8:00 - 10:30</span>
+                        <h3>凯维森野生动物园 Caversham Wildlife Park</h3>
+                        <p>西澳最受欢迎的野生动物园。抱考拉、喂袋鼠、看袋熊，还有剪羊毛表演。早上动物最活跃，建议预留2-3小时。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🎫</span><div><h4>门票</h4><p>成人约 $45 AUD</p></div></div>
+                            <div class="info-card"><span class="info-icon">📍</span><div><h4>距离珀斯</h4><p>约 30km，40分钟</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Caversham+Wildlife+Park" target="_blank" class="nav-link">📍 导航：凯维森野生动物园</a>
+                        <div class="photo-spots">
+                            <h4>📸 必拍</h4>
+                            <div class="photo-grid">
+                                <div class="photo-item"><span class="emoji">🐨</span>抱考拉</div>
+                                <div class="photo-item"><span class="emoji">🦘</span>喂袋鼠</div>
+                                <div class="photo-item"><span class="emoji">🐻</span>袋熊特写</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">中午 12:00 - 14:00</span>
+                        <h3>兰斯林白沙丘 Lancelin Sand Dunes</h3>
+                        <p>印度洋与沙漠之间的白色沙丘。租滑沙板体验俯冲快感，拍沙漠与海洋同框大片。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🏄</span><div><h4>滑沙板</h4><p>约 $15-20/小时</p></div></div>
+                            <div class="info-card"><span class="info-icon">⚠️</span><div><h4>注意</h4><p>做好防晒，带足水</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Lancelin+Sand+Dunes" target="_blank" class="nav-link">📍 导航：兰斯林白沙丘</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 16:00 - 19:00</span>
+                        <h3>尖峰石阵 Nambung National Park</h3>
+                        <p>数千根石灰岩柱从沙漠中拔地而起的外星地貌。日落前1小时入园，金色阳光照射石柱极为震撼。园内自驾环线约4km。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🎫</span><div><h4>门票</h4><p>约 $15 AUD/车</p></div></div>
+                            <div class="info-card"><span class="info-icon">🌅</span><div><h4>最佳时间</h4><p>日落前1小时入园</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Nambung+National+Park+Pinnacles+Desert" target="_blank" class="nav-link">📍 导航：尖峰石阵</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">夜间 20:00 - 22:00</span>
+                        <h3>🌌 尖峰石阵观星</h3>
+                        <p>南半球银河在无光污染的沙漠上空格外清晰。石柱群+星空是西澳顶级体验。冬季（6-8月）银河最壮观。</p>
+                        <div class="tips-box">
+                            <h4>观星贴士</h4>
+                            <ul>
+                                <li>下载 Star Walk APP 识别星座</li>
+                                <li>携带三脚架拍星轨</li>
+                                <li>满月避开，新月最佳</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="route-map-box">
+                    <h4>🗺️ Day2 路线图</h4>
+                    <div class="route-segment"><div class="from-to">珀斯 → 凯维森动物园</div><div class="distance">30km</div><div class="time">40min</div></div>
+                    <div class="route-segment"><div class="from-to">凯维森 → 兰斯林白沙丘</div><div class="distance">110km</div><div class="time">1.5h</div></div>
+                    <div class="route-segment"><div class="from-to">兰斯林 → 尖峰石阵</div><div class="distance">80km</div><div class="time">1h</div></div>
+                    <div class="route-segment"><div class="from-to">尖峰石阵 → 塞万提斯</div><div class="distance">20km</div><div class="time">20min</div></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--ocean-mid);">📍 <a href="https://maps.google.com/?q=Perth+to+Cervantes+via+Lancelin" target="_blank" style="color: var(--ocean-deep); text-decoration: underline;">完整路线导航 (Google Maps)</a></p>
+                </div>
+                <div class="info-cards" style="margin-top: 2rem;">
+                    <div class="info-card"><span class="info-icon">🏨</span><div><h4>住宿</h4><p>塞万提斯 (Cervantes)</p></div></div>
+                    <div class="info-card"><span class="info-icon">🚗</span><div><h4>今日车程</h4><p>约 4 小时，轻松不赶</p></div></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ========== DAY 3: CERVANTES TO KALBARRI ========== -->
+        <article class="day-section">
+            <div class="day-header">
+                <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80" alt="印度洋海岸">
+                <div class="day-header-overlay">
+                    <div class="day-number">03</div>
+                    <h2>塞万提斯 → 朱里恩湾 → 粉红湖 → 卡尔巴里</h2>
+                    <div class="day-route">
+                        <span>🦞 龙虾大餐</span><span>•</span><span>🦭 海狮共游</span><span>•</span><span>🌸 粉红湖</span>
+                    </div>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 8:30 - 10:00</span>
+                        <h3>塞万提斯龙虾工厂</h3>
+                        <p>新鲜西澳岩龙虾直接加工，肉质紧实鲜甜。点整只烤龙虾配沙拉柠檬，简单烹饪最显本味。也可以买伴手礼带走。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">💰</span><div><h4>人均</h4><p>约 $50-80 AUD</p></div></div>
+                            <div class="info-card"><span class="info-icon">🦞</span><div><h4>推荐</h4><p>整只烤龙虾</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Cervantes+Lobster+Shack" target="_blank" class="nav-link">📍 导航：龙虾工厂</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">中午 11:00 - 14:00</span>
+                        <h3>朱里恩湾海狮体验</h3>
+                        <p>乘船出海与野生澳洲海狮同游。海狮天性好奇友善，会围绕你游弋翻跟头。浮潜装备包含，不会游泳也可穿救生衣。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🎫</span><div><h4>费用</h4><p>约 $150-180/人</p></div></div>
+                            <div class="info-card"><span class="info-icon">⏱️</span><div><h4>时长</h4><p>约 2.5 小时</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Jurien+Bay+Sea+Lion+Swim" target="_blank" class="nav-link">📍 导航：朱里恩湾海狮</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 15:00 - 17:00</span>
+                        <h3>赫特泻湖粉红湖 Hutt Lagoon</h3>
+                        <p>世界著名粉红湖，杜氏盐藻造就梦幻粉色。晴天10-14点颜色最鲜艳，薄荷蓝海水与粉红湖绝美撞色。高处或航拍最佳。</p>
+                        <div class="photo-spots">
+                            <h4>📸 必拍</h4>
+                            <div class="photo-grid">
+                                <div class="photo-item"><span class="emoji">🚁</span>航拍粉蓝撞色</div>
+                                <div class="photo-item"><span class="emoji">👗</span>白色长裙走拍</div>
+                                <div class="photo-item"><span class="emoji">🌸</span>湖水倒影</div>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Hutt+Lagoon+Pink+Lake" target="_blank" class="nav-link">📍 导航：粉红湖</a>
+                    </div>
+                </div>
+                <div class="route-map-box">
+                    <h4>🗺️ Day3 路线图</h4>
+                    <div class="route-segment"><div class="from-to">塞万提斯 → 朱里恩湾</div><div class="distance">55km</div><div class="time">45min</div></div>
+                    <div class="route-segment"><div class="from-to">朱里恩湾 → 粉红湖</div><div class="distance">170km</div><div class="time">2h</div></div>
+                    <div class="route-segment"><div class="from-to">粉红湖 → 卡尔巴里</div><div class="distance">130km</div><div class="time">1.5h</div></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--ocean-mid);">📍 <a href="https://maps.google.com/?q=Cervantes+to+Kalbarri+via+Hutt+Lagoon" target="_blank" style="color: var(--ocean-deep); text-decoration: underline;">完整路线导航 (Google Maps)</a></p>
+                </div>
+                <div class="info-cards" style="margin-top: 2rem;">
+                    <div class="info-card"><span class="info-icon">🏨</span><div><h4>住宿</h4><p>卡尔巴里 (Kalbarri)</p></div></div>
+                    <div class="info-card"><span class="info-icon">🚗</span><div><h4>今日车程</h4><p>约 4.5 小时</p></div></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ========== DAY 4: KALBARRI ========== -->
+        <article class="day-section">
+            <div class="day-header">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80" alt="卡尔巴里">
+                <div class="day-header-overlay">
+                    <div class="day-number">04</div>
+                    <h2>卡尔巴里国家公园 → 兰斯林</h2>
+                    <div class="day-route">
+                        <span>🪨 自然之窗</span><span>•</span><span>🌉 天空之桥</span><span>•</span><span>🏔️ 海岸红崖</span><span>•</span><span>🌙 南下住宿</span>
+                    </div>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 8:00 - 11:00</span>
+                        <h3>自然之窗 Nature's Window</h3>
+                        <p>天然岩石拱门框住梅奇森河谷壮丽景色。往返徒步约2.5km，难度适中。西澳最经典打卡点之一，建议清晨避开人流。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🥾</span><div><h4>徒步</h4><p>往返 2.5km，约1h</p></div></div>
+                            <div class="info-card"><span class="info-icon">⚠️</span><div><h4>注意</h4><p>带足水，穿防滑鞋</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Natures+Window+Kalbarri" target="_blank" class="nav-link">📍 导航：自然之窗</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">中午 12:00 - 13:30</span>
+                        <h3>天空之桥 Kalbarri Skywalk</h3>
+                        <p>两座85米悬臂平台距谷底100米，玻璃地板俯瞰峡谷和印度洋。视觉冲击力极强。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🎫</span><div><h4>门票</h4><p>含在国家公园票中</p></div></div>
+                            <div class="info-card"><span class="info-icon">📸</span><div><h4>拍照</h4><p>玻璃地板俯拍</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Kalbarri+Skywalk" target="_blank" class="nav-link">📍 导航：天空之桥</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 14:30 - 17:00</span>
+                        <h3>海岸红崖 Coastal Cliffs</h3>
+                        <p>100米红色砂岩悬崖直插印度洋。天然拱门、洞穴、石柱群令人叹为观止。Island Rock、Red Bluff、Grandstand 等观景点。</p>
+                        <div class="photo-spots">
+                            <h4>📸 必拍</h4>
+                            <div class="photo-grid">
+                                <div class="photo-item"><span class="emoji">🪟</span>自然之窗</div>
+                                <div class="photo-item"><span class="emoji">🌉</span>天空之桥</div>
+                                <div class="photo-item"><span class="emoji">🌊</span>红崖海浪</div>
+                                <div class="photo-item"><span class="emoji">🪨</span>Island Rock</div>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Kalbarri+Coastal+Cliffs+Red+Bluff" target="_blank" class="nav-link">📍 导航：海岸红崖</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 17:00 - 20:30</span>
+                        <h3>🚗 卡尔巴里 → 兰斯林（南下住宿）</h3>
+                        <p>沿印度洋公路南下，沿途欣赏海岸落日。卡尔巴里到兰斯林约275km，3.5小时车程。途经杰拉尔顿可短暂休息补给。到达兰斯林后休息，为次日轻松赶航班做准备。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🚗</span><div><h4>距离</h4><p>约 275km</p></div></div>
+                            <div class="info-card"><span class="info-icon">⏱️</span><div><h4>车程</h4><p>约 3.5 小时</p></div></div>
+                            <div class="info-card"><span class="info-icon">⛽</span><div><h4>加油</h4><p>杰拉尔顿最后一次便宜加油</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Kalbarri+to+Lancelin" target="_blank" class="nav-link">📍 导航：卡尔巴里→兰斯林</a>
+                    </div>
+                </div>
+                <div class="route-map-box">
+                    <h4>🗺️ Day4 路线图</h4>
+                    <div class="route-segment"><div class="from-to">卡尔巴里镇 → 自然之窗</div><div class="distance">约17km</div><div class="time">20min</div></div>
+                    <div class="route-segment"><div class="from-to">自然之窗 → 天空之桥</div><div class="distance">园内约8km</div><div class="time">15min</div></div>
+                    <div class="route-segment"><div class="from-to">天空之桥 → 海岸红崖</div><div class="distance">园内约12km</div><div class="time">20min</div></div>
+                    <div class="route-segment"><div class="from-to">卡尔巴里 → 兰斯林（住宿）</div><div class="distance">275km</div><div class="time">3.5h</div></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--ocean-mid);">📍 <a href="https://maps.google.com/?q=Kalbarri+to+Lancelin+WA" target="_blank" style="color: var(--ocean-deep); text-decoration: underline;">完整路线导航 (Google Maps)</a></p>
+                </div>
+                <div class="info-cards" style="margin-top: 2rem;">
+                    <div class="info-card"><span class="info-icon">🏨</span><div><h4>住宿</h4><p>兰斯林 (Lancelin) — 距珀斯仅120km</p></div></div>
+                    <div class="info-card"><span class="info-icon">🚗</span><div><h4>今日车程</h4><p>约 4.5 小时（含国家公园+南下）</p></div></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ========== DAY 5: LANCELIN TO PERTH (FLIGHT) ========== -->
+        <article class="day-section">
+            <div class="day-header">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="兰斯林白沙丘">
+                <div class="day-header-overlay">
+                    <div class="day-number">05</div>
+                    <h2>兰斯林 → 珀斯 ✈️ 18:25航班</h2>
+                    <div class="day-route">
+                        <span>🏖️ 白沙丘晨游</span><span>•</span><span>🛣️ 轻松返程</span><span>•</span><span>✈️ 从容赶航班</span>
+                    </div>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="tips-box" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, #e6fffa, #b2f5ea); border-left-color: var(--forest);">
+                    <h4 style="color: #22543d;">✨ 最终优化 — 完美解决航班日时间压力</h4>
+                    <ul>
+                        <li>Day4 晚上住兰斯林，距珀斯仅 120km/1.5h</li>
+                        <li>18:25 航班 = 16:25 到机场，14:30 从兰斯林出发完全来得及</li>
+                        <li>上午还能再玩一次白沙丘，下午悠闲返程</li>
+                    </ul>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 8:00 - 10:00</span>
+                        <h3>兰斯林白沙丘晨游 Lancelin Sand Dunes</h3>
+                        <p>如果 Day2 时间不够或没玩过瘾，早上可以再来一次。清晨光线柔和，沙丘拍照特别美。也可以体验沙丘滑板、沙滩漫步。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🏄</span><div><h4>滑沙板</h4><p>约 $15-20/小时</p></div></div>
+                            <div class="info-card"><span class="info-icon">📸</span><div><h4>晨光</h4><p>日出后1小时最佳</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Lancelin+Sand+Dunes" target="_blank" class="nav-link">📍 导航：兰斯林白沙丘</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 10:00 - 14:00</span>
+                        <h3>兰斯林/塞万提斯休闲时光</h3>
+                        <p>在海边咖啡馆吃早餐、喝咖啡、享受印度洋海风。也可以去塞万提斯（20min车程）逛逛龙虾工厂纪念品店。慢慢收拾行李，享受旅程最后一天。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">☕</span><div><h4>推荐</h4><p>海边咖啡馆早餐</p></div></div>
+                            <div class="info-card"><span class="info-icon">🦞</span><div><h4>可选</h4><p>塞万提斯龙虾工厂</p></div></div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 14:30 - 16:30</span>
+                        <h3>🚗 兰斯林 → 珀斯机场</h3>
+                        <p>兰斯林到珀斯机场约 120km，1.5 小时车程。<strong>14:30 出发 = 16:00 到机场</strong>，完全来得及办理 18:25 航班。沿途 Indian Ocean Drive 风景优美，可以边开边欣赏。</p>
+                        <div class="tips-box" style="background: linear-gradient(135deg, #e6fffa, #b2f5ea); border-left-color: var(--forest);">
+                            <h4 style="color: #22543d;">✅ 时间规划</h4>
+                            <ul>
+                                <li>14:30 从兰斯林出发</li>
+                                <li>16:00 到达珀斯机场</li>
+                                <li>16:25 前办理登机手续</li>
+                                <li>18:25 航班起飞 — 完美！</li>
+                            </ul>
+                        </div>
+                        <a href="https://maps.google.com/?q=Lancelin+to+Perth+Airport" target="_blank" class="nav-link">📍 导航：兰斯林→珀斯机场</a>
+                    </div>
+                </div>
+                <div class="route-map-box">
+                    <h4>🗺️ Day5 路线图（轻松返程）</h4>
+                    <div class="route-segment"><div class="from-to">兰斯林 → 珀斯机场</div><div class="distance">120km</div><div class="time">1.5h</div></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--ocean-mid);">📍 <a href="https://maps.google.com/?q=Lancelin+to+Perth+Airport" target="_blank" style="color: var(--ocean-deep); text-decoration: underline;">完整返程路线导航 (Google Maps)</a></p>
+                </div>
+                <div class="info-cards" style="margin-top: 2rem;">
+                    <div class="info-card"><span class="info-icon">✈️</span><div><h4>航班</h4><p>18:25 珀斯起飞</p></div></div>
+                    <div class="info-card"><span class="info-icon">🏁</span><div><h4>到机场</h4><p>约 16:00，充裕</p></div></div>
+                    <div class="info-card"><span class="info-icon">🎉</span><div><h4>行程</h4><p>完美收官！</p></div></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ========== TWO PLANS COMPARISON ========== -->
+        <section class="packing-section">
+            <h2>🔄 Day4-Day5 两种方案对比</h2>
+            <p style="text-align:center; color: #666; margin-bottom: 2rem;">Day4 卡尔巴里国家公园结束后，住宿选择影响 Day5 体验。以下是两个方案：</p>
+            <div class="plan-compare">
+                <!-- PLAN A -->
+                <div class="plan-card recommended">
+                    <div class="plan-header">
+                        <h3>方案A：住兰斯林</h3>
+                        <div class="plan-tag">⭐ 推荐</div>
+                    </div>
+                    <div class="plan-body">
+                        <h4>行程安排</h4>
+                        <div class="plan-day"><div class="num">4</div><div class="desc"><strong>卡尔巴里 → 兰斯林</strong><br>国家公园玩完后南下 275km/3.5h 住兰斯林</div></div>
+                        <div class="plan-day"><div class="num">5</div><div class="desc"><strong>兰斯林 → 珀斯机场</strong><br>白沙丘晨游，14:30出发，仅 120km/1.5h</div></div>
+                        <h4 style="margin-top:1rem;">优点</h4>
+                        <ul class="plan-pros">
+                            <li>Day5 仅 1.5h 车程，极度轻松</li>
+                            <li>上午可再玩兰斯林白沙丘</li>
+                            <li>14:30 出发即可赶上 18:25 航班</li>
+                            <li>全程不回头路，顺路南下</li>
+                        </ul>
+                        <h4 style="margin-top:1rem;">不足</h4>
+                        <ul class="plan-cons">
+                            <li>Day4 车程较长（4.5h），晚上到住宿较晚</li>
+                            <li>兰斯林是小村镇，餐饮选择有限</li>
+                            <li>Day5 没有珀斯市区游玩时间</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- PLAN B -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>方案B：回珀斯 Citywalk</h3>
+                        <div class="plan-tag">🏙️ 城市体验</div>
+                    </div>
+                    <div class="plan-body">
+                        <h4>行程安排</h4>
+                        <div class="plan-day"><div class="num">4</div><div class="desc"><strong>卡尔巴里 → 珀斯</strong><br>国家公园玩完后直接回珀斯 420km/5h</div></div>
+                        <div class="plan-day"><div class="num">5</div><div class="desc"><strong>珀斯 Citywalk</strong><br>国王公园、天鹅河、弗里曼特尔，16:00去机场</div></div>
+                        <h4 style="margin-top:1rem;">优点</h4>
+                        <ul class="plan-pros">
+                            <li>Day5 在珀斯市区休闲 Citywalk，城市体验</li>
+                            <li>Day4 晚上住珀斯，餐饮购物选择多</li>
+                            <li>可以在市区购买伴手礼</li>
+                            <li>最后一天不用长途开车</li>
+                        </ul>
+                        <h4 style="margin-top:1rem;">不足</h4>
+                        <ul class="plan-cons">
+                            <li>Day4 车程很长（5h），较疲劳</li>
+                            <li>卡尔巴里直达珀斯 420km 是最大单日驾驶</li>
+                            <li>Day5 Citywalk 时间较紧（16:00 需去机场）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== DAY 5 PLAN B: PERTH CITYWALK ========== -->
+        <article class="day-section">
+            <div class="day-header">
+                <img src="https://images.unsplash.com/photo-1548323255-b93b988b0e49?w=1200&q=80" alt="珀斯城市">
+                <div class="day-header-overlay">
+                    <div class="day-number">05</div>
+                    <h2>方案B：珀斯 Citywalk ✈️ 18:25航班</h2>
+                    <div class="day-route">
+                        <span>🌳 国王公园</span><span>•</span><span>🦢 天鹅河</span><span>•</span><span>🏛️ 文化区</span><span>•</span><span>🛍️ 弗里曼特尔</span>
+                    </div>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="tips-box" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, #faf5ff, #e9d8fd); border-left-color: #6b46c1;">
+                    <h4 style="color: #553c9a;">🏙️ 方案B — 珀斯市区深度体验</h4>
+                    <ul>
+                        <li>Day4 从卡尔巴里直接开回珀斯（420km/5h），晚上住珀斯市区</li>
+                        <li>Day5 全天珀斯 Citywalk，16:00 去机场即可</li>
+                        <li>适合喜欢城市文化、不想在小镇住宿的旅行者</li>
+                    </ul>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 8:30 - 10:30</span>
+                        <h3>国王公园 Kings Park</h3>
+                        <p>南半球最大的城市公园之一，俯瞰珀斯天际线和天鹅河。步行 Botanic Garden 免费，早上光线最适合拍照。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🎫</span><div><h4>门票</h4><p>免费</p></div></div>
+                            <div class="info-card"><span class="info-icon">📸</span><div><h4>必拍</h4><p>State War Memorial 观景台</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Kings+Park+Perth" target="_blank" class="nav-link">📍 导航：国王公园</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 10:30 - 12:00</span>
+                        <h3>天鹅河 Swan River & 伊丽莎白码头</h3>
+                        <p>沿天鹅河畔散步到伊丽莎白码头（Elizabeth Quay），欣赏河景与城市天际线。可以乘坐免费 CAT 巴士。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🚌</span><div><h4>交通</h4><p>免费 CAT 巴士</p></div></div>
+                            <div class="info-card"><span class="info-icon">☕</span><div><h4>推荐</h4><p>码头边喝咖啡</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Elizabeth+Quay+Perth" target="_blank" class="nav-link">📍 导航：伊丽莎白码头</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">中午 12:00 - 14:00</span>
+                        <h3>弗里曼特尔 Fremantle</h3>
+                        <p>从珀斯市区开车 30min 或坐火车到弗里曼特尔。殖民时代建筑、街头艺术、弗里曼特尔市场（周三/周末开放）。推荐在 Fishing Boat Harbour 吃海鲜。</p>
+                        <div class="photo-spots">
+                            <h4>📸 必打卡</h4>
+                            <div class="photo-grid">
+                                <div class="photo-item"><span class="emoji">🏛️</span>Fremantle Prison</div>
+                                <div class="photo-item"><span class="emoji">🎨</span>街头涂鸦</div>
+                                <div class="photo-item"><span class="emoji">🦞</span>渔港海鲜</div>
+                                <div class="photo-item"><span class="emoji">🏪</span>Fremantle Market</div>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Fremantle+Market" target="_blank" class="nav-link">📍 导航：弗里曼特尔</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 14:00 - 16:00</span>
+                        <h3>珀斯 CBD 购物 & 文化区</h3>
+                        <p>返回珀斯市中心，逛 Hay Street 和 Murray Street 商业街。参观 WA Art Gallery（免费）、Perth Cultural Centre。最后购买伴手礼、补充旅行纪念品。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🛍️</span><div><h4>购物</h4><p>Hay St / Murray St</p></div></div>
+                            <div class="info-card"><span class="info-icon">🎨</span><div><h4>文化</h4><p>WA Art Gallery 免费</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Hay+Street+Mall+Perth" target="_blank" class="nav-link">📍 导航：Hay Street 商业街</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 16:00 - 18:25</span>
+                        <h3>🚗 前往珀斯机场 → ✈️ 航班</h3>
+                        <p>从珀斯 CBD 到机场约 20-30min（取决于交通）。<strong>16:00 出发 = 16:30 到机场</strong>，充裕时间办理 18:25 航班。还车后登机，完美收官！</p>
+                        <div class="tips-box" style="background: linear-gradient(135deg, #e6fffa, #b2f5ea); border-left-color: var(--forest);">
+                            <h4 style="color: #22543d;">✅ DayB 时间规划</h4>
+                            <ul>
+                                <li>8:30-10:30 国王公园</li>
+                                <li>10:30-12:00 天鹅河散步</li>
+                                <li>12:00-14:00 弗里曼特尔午餐</li>
+                                <li>14:00-16:00 CBD 购物</li>
+                                <li>16:00 出发去机场</li>
+                                <li>18:25 航班起飞 — 完美！</li>
+                            </ul>
+                        </div>
+                        <a href="https://maps.google.com/?q=Perth+CBD+to+Perth+Airport" target="_blank" class="nav-link">📍 导航：珀斯CBD→机场</a>
+                    </div>
+                </div>
+                <div class="route-map-box" style="background: linear-gradient(135deg, #faf5ff, #e9d8fd); border-left-color: #6b46c1;">
+                    <h4 style="color: #553c9a;">🗺️ Day5 方案B 路线图（Citywalk）</h4>
+                    <div class="route-segment"><div class="from-to">酒店 → 国王公园</div><div class="distance">5km</div><div class="time">15min</div></div>
+                    <div class="route-segment"><div class="from-to">国王公园 → 伊丽莎白码头</div><div class="distance">3km</div><div class="time">10min</div></div>
+                    <div class="route-segment"><div class="from-to">伊丽莎白码头 → 弗里曼特尔</div><div class="distance">20km</div><div class="time">30min</div></div>
+                    <div class="route-segment"><div class="from-to">弗里曼特尔 → 珀斯CBD</div><div class="distance">20km</div><div class="time">30min</div></div>
+                    <div class="route-segment"><div class="from-to">珀斯CBD → 机场</div><div class="distance">15km</div><div class="time">25min</div></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem; color: #553c9a;">📍 <a href="https://maps.google.com/?q=Perth+City+Walk+Route" target="_blank" style="color: #6b46c1; text-decoration: underline;">Citywalk 完整路线 (Google Maps)</a></p>
+                </div>
+                <div class="info-cards" style="margin-top: 2rem;">
+                    <div class="info-card"><span class="info-icon">✈️</span><div><h4>航班</h4><p>18:25 珀斯起飞</p></div></div>
+                    <div class="info-card"><span class="info-icon">🏁</span><div><h4>到机场</h4><p>约 16:30，充裕</p></div></div>
+                    <div class="info-card"><span class="info-icon">🏙️</span><div><h4>体验</h4><p>珀斯城市文化+购物</p></div></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Gallery -->
+        <section class="gallery-section">
+            <h2>📸 经典瞬间预览</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1548586196-aa5803b77379?w=600&q=80" alt="罗特内斯特岛"><div class="gallery-caption"><h3>罗特内斯特岛</h3><p>微笑Quokka的天堂</p></div></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80" alt="尖峰石阵"><div class="gallery-caption"><h3>尖峰石阵日落</h3><p>外星地貌与金色夕阳</p></div></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80" alt="海岸"><div class="gallery-caption"><h3>印度洋海岸线</h3><p>碧蓝海水与红色悬崖</p></div></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80" alt="自然之窗"><div class="gallery-caption"><h3>自然之窗</h3><p>天然石框里的印度洋</p></div></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&q=80" alt="峡谷"><div class="gallery-caption"><h3>卡尔巴里峡谷</h3><p>天空之桥俯瞰奇观</p></div></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="海滩"><div class="gallery-caption"><h3>西澳绝美海滩</h3><p>白沙碧水的浮潜天堂</p></div></div>
+            </div>
+        </section>
+
+        <!-- Budget -->
+        <section class="packing-section">
+            <h2>💰 预算参考（人均）</h2>
+            <table class="budget-table">
+                <thead><tr><th>项目</th><th>费用 (AUD)</th><th>备注</th></tr></thead>
+                <tbody>
+                    <tr><td>🚗 租车+油费</td><td>$400-600</td><td>5天SUV含保险</td></tr>
+                    <tr><td>🏨 住宿 (4晚)</td><td>$400-800</td><td>民宿/汽车旅馆</td></tr>
+                    <tr><td>🎫 景点门票</td><td>$150-250</td><td>动物园、国家公园</td></tr>
+                    <tr><td>🦞 餐饮</td><td>$300-500</td><td>含龙虾大餐</td></tr>
+                    <tr><td>🦭 海狮体验</td><td>$150-180</td><td>朱里恩湾出海</td></tr>
+                    <tr><td>⛴️ 轮渡+租车</td><td>$120-150</td><td>罗特内斯特岛</td></tr>
+                    <tr><td><strong>总计</strong></td><td><strong>$1,520-2,480</strong></td><td>约 ¥7,000-11,500</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Packing -->
+        <section class="packing-section">
+            <h2>🎒 必备行李清单</h2>
+            <div class="packing-grid">
+                <div class="packing-category"><h3>👕 衣物</h3><ul class="packing-list"><li>防晒衣/皮肤衣</li><li>泳衣/泳裤</li><li>舒适徒步鞋</li><li>薄外套（观星用）</li><li>白色/亮色衣服（拍照）</li></ul></div>
+                <div class="packing-category"><h3>🧴 防晒</h3><ul class="packing-list"><li>防晒霜 SPF50+</li><li>晒后修复芦荟胶</li><li>太阳镜</li><li>宽边遮阳帽</li></ul></div>
+                <div class="packing-category"><h3>📷 摄影</h3><ul class="packing-list"><li>相机防水袋</li><li>三脚架（星轨）</li><li>充电宝</li><li>大容量存储卡</li></ul></div>
+                <div class="packing-category"><h3>🎒 其他</h3><ul class="packing-list"><li>浮潜面镜</li><li>饮用水瓶</li><li>离线地图</li><li>现金</li></ul></div>
+            </div>
+        </section>
+
+        <!-- Tips -->
+        <section class="packing-section">
+            <h2>⚠️ 重要避坑指南</h2>
+            <div class="tips-box">
+                <ul>
+                    <li><strong>加油：</strong>北线油价高，珀斯加满出发，杰拉尔顿补给最划算</li>
+                    <li><strong>信号：</strong>尖峰石阵、粉红湖、卡尔巴里信号弱，提前下载离线地图</li>
+                    <li><strong>野生动物：</strong>清晨傍晚袋鼠鸸鹋活跃，驾车注意避让</li>
+                    <li><strong>防晒：</strong>西澳紫外线极强，每2小时补涂</li>
+                    <li><strong>Quokka：</strong>严禁喂食触摸，罚款 $300</li>
+                    <li><strong>龙虾季：</strong>11月-次年7月最肥美</li>
+                    <li><strong>粉红湖：</strong>必须晴天无风才粉，阴天变棕</li>
+                    <li><strong>航班日：</strong>Day4 住兰斯林，Day5 仅 120km/1.5h 到机场，18:25 航班无压力</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>🌏 西澳珀斯北线5日终极攻略（优化版）</p>
+        <p>罗特内斯特岛Day1全天玩 · 一路向北不回头 · Day4住兰斯林Day5轻松赶航班</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">Made for your perfect WA journey</p>
+    </footer>
+</body>
+</html>
