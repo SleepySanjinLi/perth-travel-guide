@@ -7,16 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f172a;
-            --surface: #1e293b;
-            --surface2: #334155;
-            --border: #475569;
-            --text: #f1f5f9;
-            --text-dim: #94a3b8;
+            --bg: #0c1929;
+            --surface: #152238;
+            --border: #1e3a5f;
+            --text: #e8f0fe;
+            --text-dim: #7ea8c9;
+            --ocean: #0a2a4a;
+            --land: #1a3352;
+            --land-stroke: #2a5a7a;
             --accent-a: #38bdf8;
-            --accent-a-bg: rgba(56,189,248,0.1);
             --accent-b: #a78bfa;
-            --accent-b-bg: rgba(167,139,250,0.1);
             --gold: #fbbf24;
             --green: #34d399;
             --rose: #fb7185;
@@ -24,298 +24,446 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-        .hero { text-align: center; padding: 3rem 2rem 1.5rem; position: relative; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 200px; background: radial-gradient(ellipse at 50% 0%, rgba(56,189,248,0.12) 0%, transparent 70%); pointer-events: none; }
-        .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); background: linear-gradient(135deg, var(--accent-a), var(--accent-b)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.4rem; }
-        .hero p { color: var(--text-dim); font-size: 0.95rem; }
+        .hero { text-align: center; padding: 2.5rem 2rem 1rem; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 200px; background: radial-gradient(ellipse at 50% 0%, rgba(56,189,248,0.08) 0%, transparent 70%); pointer-events: none; }
+        .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 4vw, 2.5rem); background: linear-gradient(135deg, var(--accent-a), var(--accent-b)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.3rem; }
+        .hero p { color: var(--text-dim); font-size: 0.9rem; }
 
-        .plan-tabs { display: flex; justify-content: center; gap: 0.75rem; margin: 1.5rem 0; flex-wrap: wrap; }
-        .tab-btn { padding: 0.65rem 1.5rem; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.3s; }
-        .tab-btn:hover { border-color: var(--accent-a); }
-        .tab-btn.active { border-color: var(--gold); color: var(--bg); font-weight: 700; }
-        .tab-btn.active[data-plan="a"] { background: linear-gradient(135deg, #0284c7, #38bdf8); border-color: var(--accent-a); }
-        .tab-btn.active[data-plan="b"] { background: linear-gradient(135deg, #7c3aed, #a78bfa); border-color: var(--accent-b); }
-        .tab-btn.active[data-plan="both"] { background: linear-gradient(135deg, #0284c7, #7c3aed); border-color: var(--gold); }
+        .plan-tabs { display: flex; justify-content: center; gap: 0.6rem; margin: 1.2rem 0; flex-wrap: wrap; }
+        .tab-btn { padding: 0.55rem 1.3rem; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text-dim); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+        .tab-btn:hover { border-color: var(--accent-a); color: var(--text); }
+        .tab-btn.active { color: #fff; font-weight: 700; }
+        .tab-btn.active[data-plan="a"] { background: var(--accent-a); border-color: var(--accent-a); }
+        .tab-btn.active[data-plan="b"] { background: var(--accent-b); border-color: var(--accent-b); }
+        .tab-btn.active[data-plan="both"] { background: linear-gradient(135deg, var(--accent-a), var(--accent-b)); border-color: var(--gold); }
 
-        .main-container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+        .main-container { max-width: 1100px; margin: 0 auto; padding: 0 1rem 3rem; }
 
-        /* ===== ROUTE MAP - Vertical Timeline ===== */
-        .route-map { position: relative; margin: 2rem 0; }
-        .route-line { position: absolute; left: 28px; top: 0; bottom: 0; width: 3px; background: var(--border); border-radius: 2px; }
-        .route-progress { position: absolute; left: 28px; top: 0; width: 3px; border-radius: 2px; transition: height 0.6s ease; }
-        .route-progress.plan-a { background: linear-gradient(to bottom, var(--accent-a), var(--green)); }
-        .route-progress.plan-b { background: linear-gradient(to bottom, var(--accent-b), var(--rose)); }
+        .map-wrapper {
+            background: var(--ocean);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        .map-svg { width: 100%; height: auto; display: block; }
 
-        .day-node { position: relative; padding-left: 70px; margin-bottom: 2rem; }
-        .day-dot { position: absolute; left: 18px; top: 4px; width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--border); background: var(--bg); z-index: 2; transition: all 0.3s; }
-        .day-node.common .day-dot { border-color: var(--accent-a); background: var(--accent-a); }
-        .day-node.plan-a-only .day-dot { border-color: var(--accent-a); background: var(--accent-a); }
-        .day-node.plan-b-only .day-dot { border-color: var(--accent-b); background: var(--accent-b); }
-        .day-node.split .day-dot { border-color: var(--gold); background: var(--gold); }
+        .legend-bar {
+            display: flex; justify-content: center; gap: 1.5rem; padding: 0.75rem 1rem;
+            background: var(--surface); flex-wrap: wrap;
+        }
+        .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-dim); }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .legend-line { width: 24px; height: 3px; border-radius: 2px; }
 
-        .day-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
-        .day-node.common .day-label { color: var(--accent-a); }
-        .day-node.plan-a-only .day-label { color: var(--accent-a); }
-        .day-node.plan-b-only .day-label { color: var(--accent-b); }
-        .day-node.split .day-label { color: var(--gold); }
+        /* Day info cards below map */
+        .day-info-section { margin-top: 2rem; }
+        .day-info-section h2 { text-align: center; font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 1.2rem; color: var(--text); }
+        .day-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; }
+        .day-info-card {
+            background: var(--surface); border-radius: 12px; padding: 1rem; border: 1px solid var(--border);
+            transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .day-info-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .day-info-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+        .day-info-card.common::before { background: var(--accent-a); }
+        .day-info-card.a-only::before { background: var(--accent-a); }
+        .day-info-card.b-only::before { background: var(--accent-b); }
+        .day-info-card.split::before { background: linear-gradient(90deg, var(--accent-a), var(--accent-b)); }
 
-        .day-card { background: var(--surface); border-radius: 14px; padding: 1.25rem; border: 1px solid var(--border); transition: all 0.3s; }
-        .day-card:hover { border-color: var(--border); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
-        .day-card h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
-        .day-card .route-path { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
-        .day-card .route-path .arrow { color: var(--gold); }
-        .day-card .stats { display: flex; gap: 1rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
-        .day-card .stat { font-size: 0.8rem; color: var(--text-dim); display: flex; align-items: center; gap: 0.3rem; }
-        .day-card .stat .val { color: var(--text); font-weight: 500; }
-        .day-card .spots { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.5rem; }
-        .day-card .spot-tag { background: var(--surface2); padding: 0.15rem 0.55rem; border-radius: 5px; font-size: 0.72rem; color: var(--text-dim); }
-        .day-card .hotel-badge { display: inline-flex; align-items: center; gap: 0.3rem; background: rgba(52,211,153,0.12); color: var(--green); padding: 0.25rem 0.65rem; border-radius: 7px; font-size: 0.78rem; font-weight: 500; }
+        .day-info-card .day-num { font-family: 'DM Serif Display', serif; font-size: 1.8rem; line-height: 1; margin-bottom: 0.3rem; }
+        .day-info-card.common .day-num { color: var(--accent-a); }
+        .day-info-card.a-only .day-num { color: var(--accent-a); }
+        .day-info-card.b-only .day-num { color: var(--accent-b); }
+        .day-info-card.split .day-num { background: linear-gradient(135deg, var(--accent-a), var(--accent-b)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .day-info-card h4 { font-size: 0.85rem; margin-bottom: 0.4rem; }
+        .day-info-card .info-row { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.3rem; }
+        .day-info-card .info-row span { color: var(--text); font-weight: 500; }
+        .day-info-card .spots { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.4rem; }
+        .day-info-card .spot { background: var(--border); padding: 0.1rem 0.45rem; border-radius: 4px; font-size: 0.68rem; color: var(--text-dim); }
+        .day-info-card .hotel { display: inline-flex; align-items: center; gap: 0.2rem; font-size: 0.75rem; color: var(--green); }
 
-        /* Split day (Day4/5) - two columns */
-        .split-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .split-card { background: var(--surface); border-radius: 14px; padding: 1.25rem; border: 1px solid var(--border); }
-        .split-card.plan-a { border-top: 3px solid var(--accent-a); }
-        .split-card.plan-b { border-top: 3px solid var(--accent-b); }
-        .split-card h4 { font-size: 0.85rem; margin-bottom: 0.5rem; }
-        .split-card.plan-a h4 { color: var(--accent-a); }
-        .split-card.plan-b h4 { color: var(--accent-b); }
-        .split-card .route-path { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 0.5rem; }
-        .split-card .stat { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 0.3rem; }
-        .split-card .stat .val { color: var(--text); font-weight: 500; }
-        .split-card .spots { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.4rem; }
-        .split-card .spot-tag { background: var(--surface2); padding: 0.12rem 0.5rem; border-radius: 5px; font-size: 0.7rem; color: var(--text-dim); }
-        .split-card .hotel-badge { display: inline-flex; align-items: center; gap: 0.25rem; background: rgba(52,211,153,0.12); color: var(--green); padding: 0.2rem 0.55rem; border-radius: 7px; font-size: 0.75rem; font-weight: 500; }
-
-        /* Difference banner */
-        .diff-banner { background: var(--surface); border: 1px dashed var(--gold); border-radius: 16px; padding: 1.5rem; margin-top: 2.5rem; }
-        .diff-banner h4 { color: var(--gold); margin-bottom: 1rem; font-size: 1rem; text-align: center; }
-        .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        .diff-item { background: var(--surface2); padding: 0.85rem; border-radius: 10px; }
-        .diff-item .label { font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.35rem; }
-        .diff-item .val { font-size: 0.82rem; font-weight: 500; }
-        .diff-item .val.a { color: var(--accent-a); }
-        .diff-item .val.b { color: var(--accent-b); }
-
-        .hidden { display: none; }
+        .diff-banner {
+            background: var(--surface); border: 1px dashed var(--gold); border-radius: 14px;
+            padding: 1.2rem; margin-top: 2rem;
+        }
+        .diff-banner h4 { color: var(--gold); margin-bottom: 0.75rem; font-size: 0.95rem; text-align: center; }
+        .diff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.6rem; }
+        .diff-item { background: rgba(255,255,255,0.03); padding: 0.7rem; border-radius: 8px; }
+        .diff-item .label { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.3rem; }
+        .diff-item .vals { display: flex; flex-direction: column; gap: 0.15rem; }
+        .diff-item .v { font-size: 0.78rem; font-weight: 500; }
+        .diff-item .v.a { color: var(--accent-a); }
+        .diff-item .v.b { color: var(--accent-b); }
+        .hidden { display: none !important; }
 
         @media (max-width: 768px) {
-            .split-cards { grid-template-columns: 1fr; }
+            .day-cards { grid-template-columns: 1fr 1fr; }
             .diff-grid { grid-template-columns: 1fr; }
-            .day-node { padding-left: 55px; }
-            .route-line, .route-progress { left: 20px; }
-            .day-dot { left: 10px; }
         }
     </style>
 </head>
 <body>
     <section class="hero">
-        <h1>Perth North Coast 5-Day Route</h1>
+        <h1>Perth North Coast Route Map</h1>
         <p>西澳珀斯北线5日自驾路线图 · 方案A vs 方案B</p>
     </section>
 
     <div class="plan-tabs">
         <button class="tab-btn active" data-plan="both" onclick="showPlan('both', this)">双方案对比</button>
-        <button class="tab-btn" data-plan="a" onclick="showPlan('a', this)">方案A 住兰斯林</button>
-        <button class="tab-btn" data-plan="b" onclick="showPlan('b', this)">方案B 回珀斯Citywalk</button>
+        <button class="tab-btn" data-plan="a" onclick="showPlan('a', this)">方案A</button>
+        <button class="tab-btn" data-plan="b" onclick="showPlan('b', this)">方案B</button>
     </div>
 
     <div class="main-container">
-        <div class="route-map" id="route-map">
-            <div class="route-line"></div>
-            <!-- Content rendered by JS -->
+        <div class="map-wrapper">
+            <div class="legend-bar">
+                <div class="legend-item"><div class="legend-line" style="background:var(--accent-a)"></div>方案A路线</div>
+                <div class="legend-item"><div class="legend-line" style="background:var(--accent-b)"></div>方案B路线</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--gold);width:14px;height:14px"></div>主要住宿点</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--green);width:10px;height:10px"></div>景点</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--rose);width:10px;height:10px"></div>珀斯/机场</div>
+            </div>
+            <svg class="map-svg" viewBox="0 0 800 950" xmlns="http://www.w3.org/2000/svg" id="map-svg">
+                <defs>
+                    <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    <filter id="glowSmall"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    <linearGradient id="routeGradA" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0284c7"/></linearGradient>
+                    <linearGradient id="routeGradB" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient>
+                    <radialGradient id="oceanGrad" cx="0.3" cy="0.3"><stop offset="0%" stop-color="#0f2d4a"/><stop offset="100%" stop-color="#0a1e33"/></radialGradient>
+                </defs>
+
+                <!-- Ocean background -->
+                <rect width="800" height="950" fill="url(#oceanGrad)"/>
+
+                <!-- Australia western coastline (simplified but recognizable) -->
+                <path d="
+                    M 300 920
+                    Q 310 880 320 850
+                    Q 340 820 350 800
+                    Q 360 780 365 760
+                    Q 370 740 375 720
+                    Q 380 700 385 680
+                    Q 390 660 395 640
+                    Q 400 620 405 600
+                    Q 410 580 415 560
+                    Q 420 540 425 520
+                    Q 430 500 432 480
+                    Q 435 460 438 440
+                    Q 440 420 442 400
+                    Q 444 380 446 360
+                    Q 448 340 450 320
+                    Q 452 300 455 280
+                    Q 458 260 460 240
+                    Q 462 220 465 200
+                    Q 468 180 470 160
+                    Q 472 140 475 120
+                    Q 478 100 480 80
+                    Q 482 60 485 40
+                    Q 488 20 490 10
+                    L 800 10 L 800 920 Z
+                " fill="var(--land)" stroke="var(--land-stroke)" stroke-width="1.5" opacity="0.9"/>
+
+                <!-- Coast label -->
+                <text x="400" y="460" fill="#1a3a5a" font-size="13" transform="rotate(-90, 400, 460)" opacity="0.5">Western Australia Coast</text>
+
+                <!-- Ocean label -->
+                <text x="180" y="500" fill="#1a3050" font-size="16" transform="rotate(-90, 180, 500)" opacity="0.4">Indian Ocean</text>
+
+                <!-- Grid lines for visual depth -->
+                <line x1="0" y1="200" x2="800" y2="200" stroke="#0d2035" stroke-width="0.5" opacity="0.3"/>
+                <line x1="0" y1="400" x2="800" y2="400" stroke="#0d2035" stroke-width="0.5" opacity="0.3"/>
+                <line x1="0" y1="600" x2="800" y2="600" stroke="#0d2035" stroke-width="0.5" opacity="0.3"/>
+                <line x1="0" y1="800" x2="800" y2="800" stroke="#0d2035" stroke-width="0.5" opacity="0.3"/>
+
+                <!-- ============================================ -->
+                <!-- DAY 1: Perth + Rottnest Island -->
+                <!-- ============================================ -->
+                <!-- Rottnest Island -->
+                <ellipse cx="270" cy="710" rx="35" ry="12" fill="#1a3352" stroke="#2a5a7a" stroke-width="1" opacity="0.7"/>
+                <text x="270" y="714" text-anchor="middle" fill="#7ea8c9" font-size="9" opacity="0.6">Rottnest Is.</text>
+                <!-- Ferry line -->
+                <line x1="345" y1="725" x2="300" y2="712" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>
+                <!-- Day1 small label -->
+                <text x="270" y="695" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="700" filter="url(#glowSmall)">Day1</text>
+
+                <!-- PERTH - big city dot -->
+                <circle cx="355" cy="735" r="18" fill="#0c1929" stroke="#fb7185" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="355" y="731" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Perth</text>
+                <text x="355" y="745" text-anchor="middle" fill="#7ea8c9" font-size="8">珀斯 · 起点</text>
+
+                <!-- ============================================ -->
+                <!-- DAY 2: North to Cervantes -->
+                <!-- ============================================ -->
+                <!-- Caversham (small, near Perth) -->
+                <circle cx="370" cy="695" r="6" fill="#0c1929" stroke="#34d399" stroke-width="1.5"/>
+                <text x="385" y="693" fill="#7ea8c9" font-size="8">Caversham</text>
+
+                <!-- Lancelin (medium) -->
+                <circle cx="390" cy="610" r="8" fill="#0c1929" stroke="#34d399" stroke-width="1.5"/>
+                <text x="405" y="606" fill="#7ea8c9" font-size="9" font-weight="500">Lancelin</text>
+                <text x="405" y="618" fill="#7ea8c9" font-size="7">白沙丘</text>
+
+                <!-- Pinnacles (medium) -->
+                <circle cx="405" cy="530" r="8" fill="#0c1929" stroke="#34d399" stroke-width="1.5"/>
+                <text x="420" y="526" fill="#7ea8c9" font-size="9" font-weight="500">Pinnacles</text>
+                <text x="420" y="538" fill="#7ea8c9" font-size="7">尖峰石阵</text>
+
+                <!-- CERVANTES - hotel (big) -->
+                <circle cx="415" cy="495" r="14" fill="#0c1929" stroke="#fbbf24" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="415" y="491" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Cervantes</text>
+                <text x="415" y="505" text-anchor="middle" fill="#fbbf24" font-size="7">住 Day2</text>
+                <text x="415" y="478" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="600">Day2</text>
+
+                <!-- Day2 route line -->
+                <path d="M 355 735 Q 365 710 370 695 Q 380 650 390 610 Q 398 570 405 530 Q 410 510 415 495"
+                      fill="none" stroke="url(#routeGradA)" stroke-width="2.5" opacity="0.6"/>
+
+                <!-- ============================================ -->
+                <!-- DAY 3: To Kalbarri -->
+                <!-- ============================================ -->
+                <!-- Jurien Bay (small) -->
+                <circle cx="425" cy="445" r="6" fill="#0c1929" stroke="#34d399" stroke-width="1.5"/>
+                <text x="440" y="443" fill="#7ea8c9" font-size="8">Jurien Bay</text>
+
+                <!-- Pink Lake (small) -->
+                <circle cx="445" cy="370" r="6" fill="#0c1929" stroke="#34d399" stroke-width="1.5"/>
+                <text x="460" y="366" fill="#7ea8c9" font-size="8">Pink Lake</text>
+                <text x="460" y="378" fill="#7ea8c9" font-size="7">粉红湖</text>
+
+                <!-- KALBARRI - hotel (big) -->
+                <circle cx="460" cy="295" r="14" fill="#0c1929" stroke="#fbbf24" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="460" y="291" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Kalbarri</text>
+                <text x="460" y="305" text-anchor="middle" fill="#fbbf24" font-size="7">住 Day3</text>
+                <text x="460" y="278" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="600">Day3</text>
+
+                <!-- Day3 route line -->
+                <path d="M 415 495 Q 420 470 425 445 Q 435 410 445 370 Q 452 330 460 295"
+                      fill="none" stroke="url(#routeGradA)" stroke-width="2.5" opacity="0.6"/>
+
+                <!-- ============================================ -->
+                <!-- DAY 4: Kalbarri National Park -->
+                <!-- ============================================ -->
+                <!-- Nature's Window -->
+                <circle cx="495" cy="275" r="5" fill="#0c1929" stroke="#34d399" stroke-width="1.5"/>
+                <text x="510" y="273" fill="#7ea8c9" font-size="7">Nature's Window</text>
+
+                <!-- Skywalk -->
+                <circle cx="510" cy="260" r="5" fill="#0c1929" stroke="#34d399" stroke-width="1.5"/>
+                <text x="525" y="258" fill="#7ea8c9" font-size="7">Skywalk</text>
+
+                <!-- Coastal Cliffs -->
+                <circle cx="500" cy="245" r="5" fill="#0c1929" stroke="#34d399" stroke-width="1.5"/>
+                <text x="515" y="243" fill="#7ea8c9" font-size="7">Coastal Cliffs</text>
+
+                <!-- Park area label -->
+                <text x="505" y="235" fill="#fb923c" font-size="8" font-weight="500">Kalbarri National Park</text>
+
+                <!-- Inner park lines -->
+                <line x1="460" y1="295" x2="495" y2="275" stroke="#fb923c" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+                <line x1="495" y1="275" x2="510" y2="260" stroke="#fb923c" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+                <line x1="510" y1="260" x2="500" y2="245" stroke="#fb923c" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+
+                <!-- Day4 label -->
+                <text x="460" y="272" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="600">Day4</text>
+
+                <!-- ============================================ -->
+                <!-- PLAN A: Kalbarri -> Lancelin -> Perth -->
+                <!-- ============================================ -->
+                <!-- Day4A route: back to Lancelin -->
+                <path class="route-a" d="M 460 295 Q 440 380 420 470 Q 410 530 400 590 Q 395 600 392 610"
+                      fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.7" filter="url(#glowSmall)"/>
+                <text x="365" y="450" fill="#38bdf8" font-size="9" opacity="0.7">Day4A: 275km</text>
+
+                <!-- LANCELIN - hotel Day4A (big) -->
+                <circle class="hotel-a" cx="392" cy="610" r="14" fill="#0c1929" stroke="#fbbf24" stroke-width="2.5" filter="url(#glow)"/>
+                <text class="hotel-a" x="392" y="606" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="700">Lancelin</text>
+                <text class="hotel-a" x="392" y="620" text-anchor="middle" fill="#fbbf24" font-size="7">住 Day4-A</text>
+
+                <!-- Day5A route: Lancelin -> Perth Airport -->
+                <path class="route-a" d="M 392 610 Q 385 650 375 680 Q 368 700 360 720"
+                      fill="none" stroke="#34d399" stroke-width="2.5" opacity="0.7"/>
+                <text class="route-a" x="345" y="665" fill="#34d399" font-size="8">Day5A: 120km / 1.5h</text>
+
+                <!-- Perth Airport -->
+                <circle class="route-a" cx="360" cy="745" r="10" fill="#0c1929" stroke="#fb7185" stroke-width="2"/>
+                <text class="route-a" x="360" y="749" text-anchor="middle" fill="#fff" font-size="7" font-weight="600">机场</text>
+
+                <!-- ============================================ -->
+                <!-- PLAN B: Kalbarri -> Perth (direct) -->
+                <!-- ============================================ -->
+                <!-- Day4B route: direct to Perth -->
+                <path class="route-b" d="M 460 295 Q 445 400 425 500 Q 405 600 385 670 Q 370 710 355 735"
+                      fill="none" stroke="#a78bfa" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.7" filter="url(#glowSmall)"/>
+                <text class="route-b" x="440" y="520" fill="#a78bfa" font-size="9">Day4B: 420km / 5h</text>
+
+                <!-- PERTH - hotel Day4B (big) -->
+                <circle class="hotel-b" cx="355" cy="735" r="16" fill="#0c1929" stroke="#fbbf24" stroke-width="2.5" filter="url(#glow)"/>
+                <text class="hotel-b" x="355" y="731" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="700">Perth</text>
+                <text class="hotel-b" x="355" y="745" text-anchor="middle" fill="#fbbf24" font-size="7">住 Day4-B</text>
+
+                <!-- Day5B: Perth Citywalk spots (cluster around Perth) -->
+                <circle class="spot-b" cx="330" cy="715" r="5" fill="#0c1929" stroke="#a78bfa" stroke-width="1.5"/>
+                <text class="spot-b" x="318" y="712" fill="#a78bfa" font-size="6">Kings Park</text>
+
+                <circle class="spot-b" cx="340" cy="700" r="5" fill="#0c1929" stroke="#a78bfa" stroke-width="1.5"/>
+                <text class="spot-b" x="325" y="697" fill="#a78bfa" font-size="6">Swan River</text>
+
+                <circle class="spot-b" cx="300" cy="740" r="5" fill="#0c1929" stroke="#a78bfa" stroke-width="1.5"/>
+                <text class="spot-b" x="278" y="737" fill="#a78bfa" font-size="6">Fremantle</text>
+
+                <circle class="spot-b" cx="350" cy="755" r="5" fill="#0c1929" stroke="#a78bfa" stroke-width="1.5"/>
+                <text class="spot-b" x="352" y="768" fill="#a78bfa" font-size="6">CBD</text>
+
+                <!-- Citywalk connecting lines -->
+                <line class="spot-b" x1="330" y1="715" x2="340" y2="700" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+                <line class="spot-b" x1="340" y1="700" x2="350" y2="755" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+                <line class="spot-b" x1="350" y1="755" x2="300" y2="740" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+                <text class="spot-b" x="310" y="690" fill="#a78bfa" font-size="7" font-weight="500">Day5B Citywalk</text>
+
+                <!-- Day5B: Perth -> Airport -->
+                <line class="route-b" x1="355" y1="735" x2="365" y2="750" stroke="#fb7185" stroke-width="2"/>
+                <circle class="route-b" cx="365" cy="750" r="8" fill="#0c1929" stroke="#fb7185" stroke-width="1.5"/>
+                <text class="route-b" x="365" y="753" text-anchor="middle" fill="#fff" font-size="6">机场</text>
+                <text class="route-b" x="380" y="754" fill="#fb7185" font-size="7">18:25 ✈️</text>
+
+                <!-- Scale bar -->
+                <line x1="40" y1="900" x2="160" y2="900" stroke="#2a5a7a" stroke-width="1.5"/>
+                <line x1="40" y1="895" x2="40" y2="905" stroke="#2a5a7a" stroke-width="1.5"/>
+                <line x1="160" y1="895" x2="160" y2="905" stroke="#2a5a7a" stroke-width="1.5"/>
+                <text x="100" y="892" text-anchor="middle" fill="#7ea8c9" font-size="9">~200km</text>
+
+                <!-- Compass rose -->
+                <g transform="translate(70, 840)">
+                    <circle r="16" fill="#0f2d4a" stroke="#2a5a7a" stroke-width="1"/>
+                    <text y="-4" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700">N</text>
+                    <line x1="0" y1="-2" x2="0" y2="-12" stroke="#fbbf24" stroke-width="1.5"/>
+                    <line x1="0" y1="2" x2="0" y2="12" stroke="#2a5a7a" stroke-width="0.8"/>
+                    <line x1="-2" y1="0" x2="-12" y2="0" stroke="#2a5a7a" stroke-width="0.8"/>
+                    <line x1="2" y1="0" x2="12" y2="0" stroke="#2a5a7a" stroke-width="0.8"/>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Day Info Cards -->
+        <div class="day-info-section">
+            <h2 id="section-title">5天行程详情</h2>
+            <div class="day-cards" id="day-cards"></div>
         </div>
 
         <div class="diff-banner" id="diff-banner">
             <h4>📊 方案A vs 方案B 核心差异</h4>
             <div class="diff-grid">
-                <div class="diff-item">
-                    <div class="label">Day4 车程</div>
-                    <div class="val a">A: 275km / 3.5h</div>
-                    <div class="val b">B: 420km / 5h</div>
-                </div>
-                <div class="diff-item">
-                    <div class="label">Day5 车程</div>
-                    <div class="val a">A: 120km / 1.5h</div>
-                    <div class="val b">B: 15km / 25min</div>
-                </div>
-                <div class="diff-item">
-                    <div class="label">Day5 体验</div>
-                    <div class="val a">A: 白沙丘晨游</div>
-                    <div class="val b">B: Citywalk+购物</div>
-                </div>
-                <div class="diff-item">
-                    <div class="label">总里程</div>
-                    <div class="val a">A: ~1,020km</div>
-                    <div class="val b">B: ~1,130km</div>
-                </div>
+                <div class="diff-item"><div class="label">Day4 车程</div><div class="vals"><div class="v a">A: 275km / 3.5h (卡尔巴里→兰斯林)</div><div class="v b">B: 420km / 5h (卡尔巴里→珀斯)</div></div></div>
+                <div class="diff-item"><div class="label">Day5 车程</div><div class="vals"><div class="v a">A: 120km / 1.5h (兰斯林→机场)</div><div class="v b">B: 15km / 25min (市区→机场)</div></div></div>
+                <div class="diff-item"><div class="label">Day5 体验</div><div class="vals"><div class="v a">A: 白沙丘晨游 + 轻松返程</div><div class="v b">B: 国王公园 + 弗里曼特尔 + 购物</div></div></div>
+                <div class="diff-item"><div class="label">总里程</div><div class="vals"><div class="v a">A: ~1,020km / ~14.5h</div><div class="v b">B: ~1,130km / ~16h</div></div></div>
             </div>
         </div>
     </div>
 
     <script>
-        const commonDays = [
-            {
-                day: 1, title: '罗特内斯特岛全天玩',
-                route: ['珀斯', '罗特内斯特岛'],
-                km: '轮渡45min', time: '全天',
-                hotel: '珀斯 CBD',
-                spots: ['Quokka合影', '浮潜', '自行车环岛', '白沙滩']
-            },
-            {
-                day: 2, title: '北线出发',
-                route: ['珀斯', '凯维森动物园', '兰斯林白沙丘', '尖峰石阵', '塞万提斯'],
-                km: '240km', time: '4h',
-                hotel: '塞万提斯',
-                spots: ['袋熊互动', '滑沙', '石阵日落', '夜观银河']
-            },
-            {
-                day: 3, title: '海岸美食与粉红湖',
-                route: ['塞万提斯', '朱里恩湾', '赫特泻湖粉红湖', '卡尔巴里'],
-                km: '355km', time: '4.5h',
-                hotel: '卡尔巴里',
-                spots: ['龙虾工厂', '海狮共游', '粉红湖']
-            }
-        ];
-
-        const day4 = {
-            a: {
-                title: '峡谷奇观 + 南下兰斯林',
-                route: ['卡尔巴里', '国家公园', '兰斯林'],
-                km: '305km', time: '4.5h',
-                hotel: '兰斯林',
-                spots: ["Nature's Window", 'Skywalk', '海岸红崖']
-            },
-            b: {
-                title: '峡谷奇观 + 直达珀斯',
-                route: ['卡尔巴里', '国家公园', '珀斯'],
-                km: '460km', time: '6h',
-                hotel: '珀斯',
-                spots: ["Nature's Window", 'Skywalk', '海岸红崖']
-            }
+        const data = {
+            common: [
+                { day: 1, title: '罗特内斯特岛', route: '珀斯 → Rottnest Island', km: '轮渡45min', time: '全天', hotel: '珀斯 CBD', spots: ['Quokka', '浮潜', '骑行', '白沙滩'] },
+                { day: 2, title: '北线出发', route: '珀斯 → Caversham → Lancelin → Pinnacles → Cervantes', km: '240km', time: '4h', hotel: '塞万提斯', spots: ['袋熊', '滑沙', '石阵日落', '观星'] },
+                { day: 3, title: '海岸美食与粉红湖', route: 'Cervantes → Jurien Bay → Pink Lake → Kalbarri', km: '355km', time: '4.5h', hotel: '卡尔巴里', spots: ['龙虾工厂', '海狮共游', '粉红湖'] }
+            ],
+            split: [
+                {
+                    day: 4,
+                    a: { title: '峡谷+南下兰斯林', route: 'Kalbarri → 国家公园 → Lancelin', km: '305km', time: '4.5h', hotel: '兰斯林', spots: ["Nature's Window", 'Skywalk', '海岸红崖'] },
+                    b: { title: '峡谷+直达珀斯', route: 'Kalbarri → 国家公园 → 珀斯', km: '420km', time: '5h', hotel: '珀斯', spots: ["Nature's Window", 'Skywalk', '海岸红崖'] }
+                },
+                {
+                    day: 5,
+                    a: { title: '白沙丘+轻松返程', route: 'Lancelin → 珀斯机场', km: '120km', time: '1.5h', hotel: '—', spots: ['白沙丘晨游', '印度洋公路'], note: '14:30出发 → 16:00到机场' },
+                    b: { title: '珀斯 Citywalk', route: 'Kings Park → Swan River → Fremantle → CBD → 机场', km: '15km', time: '25min', hotel: '—', spots: ['国王公园', '天鹅河', 'Fremantle', 'Hay St'], note: '16:00出发 → 16:30到机场' }
+                }
+            ]
         };
 
-        const day5 = {
-            a: {
-                title: '白沙丘晨游 + 轻松返程',
-                route: ['兰斯林', '珀斯机场'],
-                km: '120km', time: '1.5h',
-                hotel: '—',
-                spots: ['白沙丘晨游', '印度洋公路'],
-                note: '14:30出发 → 16:00到机场 → 18:25航班'
-            },
-            b: {
-                title: '珀斯 Citywalk',
-                route: ['国王公园', '天鹅河', '弗里曼特尔', 'CBD购物', '机场'],
-                km: '15km', time: '25min',
-                hotel: '—',
-                spots: ['国王公园', '天鹅河', 'Fremantle', 'Hay St购物'],
-                note: '16:00出发 → 16:30到机场 → 18:25航班'
-            }
-        };
+        let plan = 'both';
 
-        let currentPlan = 'both';
-
-        function showPlan(plan, btn) {
-            currentPlan = plan;
-            document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); });
+        function showPlan(p, btn) {
+            plan = p;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
-            render();
-        }
 
-        function render() {
-            const map = document.getElementById('route-map');
-            const banner = document.getElementById('diff-banner');
-            let html = '<div class="route-line"></div>';
-
-            // Common days (Day1-3)
-            commonDays.forEach(d => {
-                html += renderCommonDay(d);
+            // Show/hide route groups on SVG
+            document.querySelectorAll('.route-a, .hotel-a').forEach(el => {
+                el.style.display = (p === 'both' || p === 'a') ? '' : 'none';
+            });
+            document.querySelectorAll('.route-b, .hotel-b, .spot-b').forEach(el => {
+                el.style.display = (p === 'both' || p === 'b') ? '' : 'none';
             });
 
-            // Split days (Day4-5)
-            if (currentPlan === 'both') {
-                html += renderSplitDay(4, day4, 'a');
-                html += renderSplitDay(5, day5, 'b');
-                banner.classList.remove('hidden');
+            document.getElementById('diff-banner').classList.toggle('hidden', p !== 'both');
+
+            renderCards();
+        }
+
+        function renderCards() {
+            const container = document.getElementById('day-cards');
+            const title = document.getElementById('section-title');
+            let html = '';
+
+            data.common.forEach(d => {
+                html += `
+                <div class="day-info-card common">
+                    <div class="day-num">Day ${d.day}</div>
+                    <h4>${d.title}</h4>
+                    <div class="info-row">🚗 <span>${d.km}</span> · ⏱️ <span>${d.time}</span></div>
+                    <div class="spots">${d.spots.map(s => `<span class="spot">${s}</span>`).join('')}</div>
+                    <div class="hotel">🏨 ${d.hotel}</div>
+                </div>`;
+            });
+
+            if (plan === 'both') {
+                data.split.forEach(d => {
+                    html += `
+                    <div class="day-info-card split">
+                        <div class="day-num">Day ${d.day}</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
+                            <div>
+                                <div style="font-size:0.7rem;color:var(--accent-a);font-weight:600;margin-bottom:0.2rem">方案A</div>
+                                <div style="font-size:0.78rem;margin-bottom:0.2rem">${d.a.title}</div>
+                                <div style="font-size:0.7rem;color:var(--text-dim)">🚗 ${d.a.km} · ${d.a.time}</div>
+                                <div style="font-size:0.7rem;color:var(--green)">🏨 ${d.a.hotel}</div>
+                            </div>
+                            <div>
+                                <div style="font-size:0.7rem;color:var(--accent-b);font-weight:600;margin-bottom:0.2rem">方案B</div>
+                                <div style="font-size:0.78rem;margin-bottom:0.2rem">${d.b.title}</div>
+                                <div style="font-size:0.7rem;color:var(--text-dim)">🚗 ${d.b.km} · ${d.b.time}</div>
+                                <div style="font-size:0.7rem;color:var(--green)">🏨 ${d.b.hotel}</div>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                title.textContent = '5天行程详情';
             } else {
-                const d = currentPlan === 'a' ? day4.a : day4.b;
-                const e = currentPlan === 'a' ? day5.a : day5.b;
-                html += renderSingleDay(4, d, currentPlan);
-                html += renderSingleDay(5, e, currentPlan);
-                banner.classList.add('hidden');
+                const key = plan;
+                data.split.forEach(d => {
+                    const info = d[key];
+                    const note = info.note ? `<div style="font-size:0.68rem;color:var(--gold);margin-top:0.2rem">⏰ ${info.note}</div>` : '';
+                    html += `
+                    <div class="day-info-card ${key}-only">
+                        <div class="day-num">Day ${d.day}</div>
+                        <h4>${info.title}</h4>
+                        <div class="info-row">🚗 <span>${info.km}</span> · ⏱️ <span>${info.time}</span></div>
+                        <div class="spots">${info.spots.map(s => `<span class="spot">${s}</span>`).join('')}</div>
+                        <div class="hotel">🏨 ${info.hotel}</div>
+                        ${note}
+                    </div>`;
+                });
+                title.textContent = plan === 'a' ? '方案A 行程详情' : '方案B 行程详情';
             }
 
-            map.innerHTML = html;
+            container.innerHTML = html;
         }
 
-        function renderCommonDay(d) {
-            return `
-            <div class="day-node common">
-                <div class="day-dot"></div>
-                <div class="day-label">Day ${d.day}</div>
-                <div class="day-card">
-                    <h3>${d.title}</h3>
-                    <div class="route-path">${d.route.join(' <span class="arrow">→</span> ')}</div>
-                    <div class="stats">
-                        <span class="stat">🚗 <span class="val">${d.km}</span></span>
-                        <span class="stat">⏱️ <span class="val">${d.time}</span></span>
-                    </div>
-                    <div class="spots">${d.spots.map(s => `<span class="spot-tag">${s}</span>`).join('')}</div>
-                    <span class="hotel-badge">🏨 ${d.hotel}</span>
-                </div>
-            </div>`;
-        }
-
-        function renderSplitDay(dayNum, data, side) {
-            const a = data.a, b = data.b;
-            const noteHtml = (d) => d.note ? `<div style="margin-top:0.5rem; font-size:0.75rem; color: var(--gold);">⏰ ${d.note}</div>` : '';
-            return `
-            <div class="day-node split">
-                <div class="day-dot"></div>
-                <div class="day-label">Day ${dayNum}</div>
-                <div class="split-cards">
-                    <div class="split-card plan-a">
-                        <h4>方案A</h4>
-                        <div class="route-path">${a.route.join(' <span class="arrow" style="color:var(--gold)">→</span> ')}</div>
-                        <div class="stat">🚗 <span class="val">${a.km}</span> · ⏱️ <span class="val">${a.time}</span></div>
-                        <div class="spots">${a.spots.map(s => `<span class="spot-tag">${s}</span>`).join('')}</div>
-                        <span class="hotel-badge">🏨 ${a.hotel}</span>
-                        ${noteHtml(a)}
-                    </div>
-                    <div class="split-card plan-b">
-                        <h4>方案B</h4>
-                        <div class="route-path">${b.route.join(' <span class="arrow" style="color:var(--gold)">→</span> ')}</div>
-                        <div class="stat">🚗 <span class="val">${b.km}</span> · ⏱️ <span class="val">${b.time}</span></div>
-                        <div class="spots">${b.spots.map(s => `<span class="spot-tag">${s}</span>`).join('')}</div>
-                        <span class="hotel-badge">🏨 ${b.hotel}</span>
-                        ${noteHtml(b)}
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function renderSingleDay(dayNum, d, plan) {
-            const cls = plan === 'a' ? 'plan-a-only' : 'plan-b-only';
-            const noteHtml = d.note ? `<div style="margin-top:0.5rem; font-size:0.75rem; color: var(--gold);">⏰ ${d.note}</div>` : '';
-            return `
-            <div class="day-node ${cls}">
-                <div class="day-dot"></div>
-                <div class="day-label">Day ${dayNum}</div>
-                <div class="day-card">
-                    <h3>${d.title}</h3>
-                    <div class="route-path">${d.route.join(' <span class="arrow">→</span> ')}</div>
-                    <div class="stats">
-                        <span class="stat">🚗 <span class="val">${d.km}</span></span>
-                        <span class="stat">⏱️ <span class="val">${d.time}</span></span>
-                    </div>
-                    <div class="spots">${d.spots.map(s => `<span class="spot-tag">${s}</span>`).join('')}</div>
-                    <span class="hotel-badge">🏨 ${d.hotel}</span>
-                    ${noteHtml}
-                </div>
-            </div>`;
-        }
-
-        render();
+        renderCards();
     </script>
 </body>
 </html>
