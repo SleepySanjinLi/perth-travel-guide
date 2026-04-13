@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <title>西澳珀斯北线5日终极攻略（优化版）| Perth North Coast Adventure</title>
+    <title>西澳珀斯南北线5日终极攻略（三方案）| Perth North & South Coast Adventure</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -166,7 +166,7 @@
         .mobile-day-card .mdc-stat.hotel { color: var(--forest); }
         .mobile-day-card .mdc-highlight { font-size: 0.8rem; color: var(--sunset-gold); font-weight: 500; margin-top: 0.5rem; }
         
-        .plan-compare { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2rem 0; }
+        .plan-compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
         .plan-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
         .plan-card:hover { transform: none; box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
         .plan-card.recommended { border: 3px solid var(--sunset-gold); }
@@ -382,30 +382,28 @@
     <section class="hero">
         <div class="hero-content">
             <h1>西澳珀斯北线</h1>
-            <p class="subtitle">5日终极自驾攻略（优化版）· 罗特内斯特岛Day1 · 一路向北不回头</p>
+            <p class="subtitle">5日终极自驾攻略 · 罗特内斯特岛Day1 · 北线/南线/城市全体验</p>
             <div class="hero-meta">
-                <span class="meta-badge">🚗 总里程 1,200km</span>
+                <span class="meta-badge">🚗 北线+南线</span>
                 <span class="meta-badge">📅 5天4晚</span>
                 <span class="meta-badge">⭐ 网红全覆盖</span>
                 <span class="meta-badge">🏝️ 岛玩Day1不赶路</span>
+                <span class="meta-badge">🌊 南北线+城市三方案</span>
             </div>
         </div>
     </section>
 
     <div class="container">
         <section class="overview">
-            <h2>📍 优化版行程总览</h2>
-            <p style="text-align:center; color: var(--coral); margin-bottom: 1.5rem; font-weight: 500;">✨ 核心优化：罗特内斯特岛放Day1，Day5纯开车返程赶航班，再无时间压力</p>
+            <h2>📍 三方案行程总览</h2>
+            <p style="text-align:center; color: var(--coral); margin-bottom: 1rem; font-weight: 500;">✨ 三种玩法：A=北线深度 / B=北线+城市 / C=北线2天往返+南线+Citywalk</p>
+            <p style="text-align:center; color: #666; margin-bottom: 1.5rem; font-size: 0.9rem;">Day1-3 三方案相同，Day4-5 分岔。蓝色=方案A（住兰斯林），紫色=方案B（回珀斯Citywalk），绿色=方案C（北线2天+南线）</p>
             <div class="route-visual">
                 <div class="route-day"><div class="day-num">01</div><div class="day-label">微笑袋鼠<br><small>全天玩岛</small></div></div>
                 <div class="route-arrow">→</div>
                 <div class="route-day"><div class="day-num">02</div><div class="day-label">袋熊 & 银河<br><small>北上石阵</small></div></div>
                 <div class="route-arrow">→</div>
-                <div class="route-day"><div class="day-num">03</div><div class="day-label">海狮 & 龙虾<br><small>粉红湖</small></div></div>
-                <div class="route-arrow">→</div>
-                <div class="route-day"><div class="day-num">04</div><div class="day-label">峡谷 & 绝壁<br><small>南下兰斯林</small></div></div>
-                <div class="route-arrow">→</div>
-                <div class="route-day"><div class="day-num">05</div><div class="day-label">白沙丘晨游<br><small>完美收官</small></div></div>
+                <div class="route-day" style="background: linear-gradient(135deg, #38bdf8, #a78bfa, #34d399);"><div class="day-num">03-05</div><div class="day-label">三方案分岔<br><small>北线/南线/城市</small></div></div>
             </div>
             <div style="text-align:center; margin: 2rem 0;">
                 <a href="route-map.html" target="_blank" class="route-map-btn">
@@ -549,18 +547,19 @@
                     <div class="mdc-stats">
                         <div class="mdc-stat km">A: ~1,020km / 14.5h</div>
                         <div class="mdc-stat km">B: ~1,130km / 16h</div>
+                        <div class="mdc-stat km" style="color: var(--forest);">C: ~995km / 14.5h</div>
                     </div>
-                    <div class="mdc-highlight">A: 轻松自驾 / B: 城市体验</div>
+                    <div class="mdc-highlight">A: 最轻松 / B: 城市体验 / C: 最丰富</div>
                 </div>
             </div>
             
             <div class="highlights-grid">
                 <div class="highlight-card"><h4>🏝️ Day1 罗特内斯特岛</h4><p>全天纯玩Quokka、浮潜、自行车环岛，住珀斯无压力</p></div>
                 <div class="highlight-card"><h4>🦘 Day2 北线出发</h4><p>凯维森动物园→兰斯林滑沙→尖峰石阵日落→夜观银河</p></div>
-                <div class="highlight-card"><h4>🦞 Day3 海岸美食</h4><p>龙虾工厂大餐→海狮共游→粉红湖打卡→住卡尔巴里</p></div>
-                <div class="highlight-card"><h4>🪨 Day4 峡谷+南下</h4><p>自然之窗→天空之桥→海岸红崖→住兰斯林</p></div>
-                <div class="highlight-card"><h4>✈️ Day5 完美收官</h4><p>白沙丘晨游→120km轻松返程→18:25航班不赶路</p></div>
-                <div class="highlight-card"><h4>🌊 优化亮点</h4><p>Day5不再有岛上行赶飞机压力，北线一路向北极致顺路</p></div>
+                <div class="highlight-card"><h4>🦞 Day3 海岸美食</h4><p>龙虾工厂大餐→海狮共游→粉红湖/返程（三方案分岔）</p></div>
+                <div class="highlight-card"><h4>🔄 Day4-5 三方案</h4><p>A=北线深度 / B=北线+城市 / C=北线2天+南线+Citywalk</p></div>
+                <div class="highlight-card"><h4>🌊 方案C亮点</h4><p>奥古斯塔灯塔+两大洋交汇+玛格丽特河，南北线全体验</p></div>
+                <div class="highlight-card"><h4>✈️ 航班日</h4><p>三方案Day5都能从容赶上18:25航班，无时间压力</p></div>
             </div>
         </section>
 
@@ -931,31 +930,32 @@
             </div>
         </article>
 
-        <!-- ========== TWO PLANS COMPARISON ========== -->
+        <!-- ========== THREE PLANS COMPARISON ========== -->
         <section class="packing-section">
-            <h2>🔄 Day4-Day5 两种方案对比</h2>
-            <p style="text-align:center; color: #666; margin-bottom: 2rem;">Day4 卡尔巴里国家公园结束后，住宿选择影响 Day5 体验。以下是两个方案：</p>
-            <div class="plan-compare">
+            <h2>🔄 Day4-Day5 三种方案对比</h2>
+            <p style="text-align:center; color: #666; margin-bottom: 0.5rem;">Day3 塞万提斯结束后，三种不同走法。选择最适合你的方案：</p>
+            <p style="text-align:center; color: var(--ocean-mid); margin-bottom: 2rem; font-size: 0.85rem;">A=北线深度（住兰斯林） | B=北线+城市（回珀斯） | C=北线2天+南线+Citywalk（最丰富）</p>
+            <div class="plan-compare" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
                 <!-- PLAN A -->
                 <div class="plan-card recommended">
                     <div class="plan-header">
                         <h3>方案A：住兰斯林</h3>
-                        <div class="plan-tag">⭐ 推荐</div>
+                        <div class="plan-tag">⭐ 最轻松</div>
                     </div>
                     <div class="plan-body">
                         <h4>行程安排</h4>
-                        <div class="plan-day"><div class="num">4</div><div class="desc"><strong>卡尔巴里 → 兰斯林</strong><br>国家公园玩完后南下 275km/3.5h 住兰斯林</div></div>
+                        <div class="plan-day"><div class="num">4</div><div class="desc"><strong>塞万提斯 → 卡尔巴里 → 兰斯林</strong><br>粉红湖→国家公园→南下 305km/4.5h 住兰斯林</div></div>
                         <div class="plan-day"><div class="num">5</div><div class="desc"><strong>兰斯林 → 珀斯机场</strong><br>白沙丘晨游，14:30出发，仅 120km/1.5h</div></div>
                         <h4 style="margin-top:1rem;">优点</h4>
                         <ul class="plan-pros">
                             <li>Day5 仅 1.5h 车程，极度轻松</li>
-                            <li>上午可再玩兰斯林白沙丘</li>
+                            <li>北线景点全覆盖（卡尔巴里+尖峰石阵）</li>
                             <li>14:30 出发即可赶上 18:25 航班</li>
-                            <li>全程不回头路，顺路南下</li>
+                            <li>全程不走回头路</li>
                         </ul>
                         <h4 style="margin-top:1rem;">不足</h4>
                         <ul class="plan-cons">
-                            <li>Day4 车程较长（4.5h），晚上到住宿较晚</li>
+                            <li>Day4 车程较长（4.5h）</li>
                             <li>兰斯林是小村镇，餐饮选择有限</li>
                             <li>Day5 没有珀斯市区游玩时间</li>
                         </ul>
@@ -969,20 +969,47 @@
                     </div>
                     <div class="plan-body">
                         <h4>行程安排</h4>
-                        <div class="plan-day"><div class="num">4</div><div class="desc"><strong>卡尔巴里 → 珀斯</strong><br>国家公园玩完后直接回珀斯 420km/5h</div></div>
+                        <div class="plan-day"><div class="num">4</div><div class="desc"><strong>塞万提斯 → 卡尔巴里 → 珀斯</strong><br>粉红湖→国家公园→直达珀斯 460km/6h</div></div>
                         <div class="plan-day"><div class="num">5</div><div class="desc"><strong>珀斯 Citywalk</strong><br>国王公园、天鹅河、弗里曼特尔，16:00去机场</div></div>
                         <h4 style="margin-top:1rem;">优点</h4>
                         <ul class="plan-pros">
-                            <li>Day5 在珀斯市区休闲 Citywalk，城市体验</li>
+                            <li>Day5 在珀斯市区休闲 Citywalk</li>
                             <li>Day4 晚上住珀斯，餐饮购物选择多</li>
                             <li>可以在市区购买伴手礼</li>
                             <li>最后一天不用长途开车</li>
                         </ul>
                         <h4 style="margin-top:1rem;">不足</h4>
                         <ul class="plan-cons">
-                            <li>Day4 车程很长（5h），较疲劳</li>
-                            <li>卡尔巴里直达珀斯 420km 是最大单日驾驶</li>
-                            <li>Day5 Citywalk 时间较紧（16:00 需去机场）</li>
+                            <li>Day4 车程很长（6h），较疲劳</li>
+                            <li>卡尔巴里直达珀斯 460km 是最大单日驾驶</li>
+                            <li>Day5 Citywalk 时间较紧</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- PLAN C -->
+                <div class="plan-card" style="border: 3px solid var(--forest);">
+                    <div class="plan-header" style="background: linear-gradient(135deg, #059669, #34d399);">
+                        <h3>方案C：北线2天+南线</h3>
+                        <div class="plan-tag">🌊 最丰富</div>
+                    </div>
+                    <div class="plan-body">
+                        <h4>行程安排</h4>
+                        <div class="plan-day"><div class="num">2</div><div class="desc"><strong>珀斯 → 塞万提斯</strong><br>凯维森动物园→尖峰石阵，住塞万提斯 240km/4h</div></div>
+                        <div class="plan-day"><div class="num">3</div><div class="desc"><strong>塞万提斯 → 珀斯</strong><br>龙虾工厂→朱里恩湾→返回珀斯 200km/3h</div></div>
+                        <div class="plan-day"><div class="num">4</div><div class="desc"><strong>珀斯 → 奥古斯塔 → 珀斯</strong><br>南线灯塔+两大洋交汇，往返 540km/7h</div></div>
+                        <div class="plan-day"><div class="num">5</div><div class="desc"><strong>珀斯 Citywalk → 机场</strong><br>国王公园+弗里曼特尔，16:00去机场</div></div>
+                        <h4 style="margin-top:1rem;">优点</h4>
+                        <ul class="plan-pros">
+                            <li>北线+南线+城市，体验最丰富</li>
+                            <li>奥古斯塔灯塔+两大洋交汇处必打卡</li>
+                            <li>Day3 返回珀斯后休整，Day4-5 不赶</li>
+                            <li>Day5 完整 Citywalk 时间充裕</li>
+                        </ul>
+                        <h4 style="margin-top:1rem;">不足</h4>
+                        <ul class="plan-cons">
+                            <li>Day4 南线往返 540km，车程最长</li>
+                            <li>北线只到尖峰石阵，没去卡尔巴里</li>
+                            <li>行程较紧凑，需要早起</li>
                         </ul>
                     </div>
                 </div>
@@ -1091,6 +1118,137 @@
             </div>
         </article>
 
+        <!-- ========== PLAN C: NORTH 2 DAYS + SOUTH COAST ========== -->
+        <article class="day-section">
+            <div class="day-header">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="方案C南线">
+                <div class="day-header-overlay">
+                    <div class="day-number">C</div>
+                    <h2>方案C：北线2天 + 南线 + Citywalk</h2>
+                    <div class="day-route">
+                        <span>🦘 北线精华</span><span>•</span><span> 奥古斯塔灯塔</span><span>•</span><span>🌊 两大洋交汇</span><span>•</span><span>🏙️ Citywalk</span>
+                    </div>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="tips-box" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, #e6fffa, #b2f5ea); border-left-color: var(--forest);">
+                    <h4 style="color: #22543d;">🌊 方案C — 北线南线全体验</h4>
+                    <ul>
+                        <li>Day1 罗特内斯特岛，Day2 北线到尖峰石阵住塞万提斯</li>
+                        <li>Day3 龙虾工厂+朱里恩湾后返回珀斯（200km/3h）</li>
+                        <li>Day4 南线往返奥古斯塔（540km/7h），看灯塔+两大洋交汇+玛格丽特河</li>
+                        <li>Day5 珀斯 Citywalk，国王公园+弗里曼特尔，16:00去机场</li>
+                    </ul>
+                </div>
+                
+                <h3 style="color: var(--forest); margin: 1.5rem 0 1rem; font-family: 'Noto Serif SC', serif;">📅 Day3：塞万提斯 → 珀斯（北线返程）</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 8:30 - 10:00</span>
+                        <h3>塞万提斯龙虾工厂</h3>
+                        <p>新鲜西澳岩龙虾直接加工，肉质紧实鲜甜。点整只烤龙虾配沙拉柠檬，简单烹饪最显本味。</p>
+                        <a href="https://maps.google.com/?q=Cervantes+Lobster+Shack" target="_blank" class="nav-link">📍 导航：龙虾工厂</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 11:00 - 13:00</span>
+                        <h3>朱里恩湾海狮体验</h3>
+                        <p>乘船出海与野生澳洲海狮同游。海狮天性好奇友善，会围绕你游弋翻跟头。浮潜装备包含。</p>
+                        <a href="https://maps.google.com/?q=Jurien+Bay+Sea+Lion+Swim" target="_blank" class="nav-link">📍 导航：朱里恩湾海狮</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 14:00 - 17:00</span>
+                        <h3>🚗 塞万提斯 → 珀斯（返程）</h3>
+                        <p>沿 Indian Ocean Drive 返回珀斯，约 200km/3h。途经兰斯林可短暂停留看白沙丘。回到珀斯后入住酒店，为次日南线养精蓄锐。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🚗</span><div><h4>距离</h4><p>约 200km</p></div></div>
+                            <div class="info-card"><span class="info-icon">⏱️</span><div><h4>车程</h4><p>约 3 小时</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Cervantes+to+Perth" target="_blank" class="nav-link">📍 导航：塞万提斯→珀斯</a>
+                    </div>
+                </div>
+                
+                <h3 style="color: var(--forest); margin: 2rem 0 1rem; font-family: 'Noto Serif SC', serif;">📅 Day4：珀斯 → 奥古斯塔 → 珀斯（南线往返）</h3>
+                <div class="tips-box" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, #e6fffa, #b2f5ea); border-left-color: var(--forest);">
+                    <h4 style="color: #22543d;">⚠️ 南线提示</h4>
+                    <ul>
+                        <li>往返 540km，建议 7:30 出发，17:30 返回珀斯</li>
+                        <li>沿途风景优美，Indian Ocean Drive 被誉为西澳最美公路</li>
+                        <li>玛格丽特河产区可品酒，奥古斯塔灯塔必打卡</li>
+                    </ul>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 7:30 - 10:30</span>
+                        <h3>🚗 珀斯 → 奥古斯塔 Augusta</h3>
+                        <p>沿 Indian Ocean Drive 南下，途经巴瑟尔顿（Busselton）可短暂停留看海上栈桥。奥古斯塔是西澳最西南角小镇，两大洋（印度洋+南大洋）交汇处所在地。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🚗</span><div><h4>距离</h4><p>约 320km</p></div></div>
+                            <div class="info-card"><span class="info-icon">⏱️</span><div><h4>车程</h4><p>约 4 小时</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Perth+to+Augusta+WA" target="_blank" class="nav-link">📍 导航：珀斯→奥古斯塔</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">上午 10:30 - 12:00</span>
+                        <h3>奥古斯塔角灯塔 Cape Leeuwin Lighthouse</h3>
+                        <p>西澳最古老的灯塔，位于印度洋和南大洋交汇处。登上灯塔俯瞰两大洋撞色的壮观景象。灯塔内博物馆展示航海历史。</p>
+                        <div class="photo-spots">
+                            <h4>📸 必拍</h4>
+                            <div class="photo-grid">
+                                <div class="photo-item"><span class="emoji">🗼</span>灯塔全景</div>
+                                <div class="photo-item"><span class="emoji">🌊</span>两大洋交汇</div>
+                                <div class="photo-item"><span class="emoji">🌅</span>悬崖日落</div>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Cape+Leeuwin+Lighthouse" target="_blank" class="nav-link">📍 导航：奥古斯塔角灯塔</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">中午 12:00 - 14:00</span>
+                        <h3>玛格丽特河 Margaret River（可选）</h3>
+                        <p>从奥古斯塔北上 40min 到达玛格丽特河产区。世界顶级葡萄酒产区，可参观酒庄品酒、吃午餐。推荐 Vasse Felix、Leeuwin Estate 等名庄。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🍷</span><div><h4>酒庄</h4><p>Vasse Felix / Leeuwin Estate</p></div></div>
+                            <div class="info-card"><span class="info-icon">🍽️</span><div><h4>午餐</h4><p>酒庄餐厅 / 镇上餐厅</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Margaret+River+WA" target="_blank" class="nav-link">📍 导航：玛格丽特河</a>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-badge">下午 14:00 - 17:30</span>
+                        <h3>🚗 奥古斯塔 → 珀斯（返程）</h3>
+                        <p>沿原路返回珀斯，约 320km/4h。如果时间充裕，回程可在巴瑟尔顿 Busselton Jetty 停留（1816米海上栈桥，可坐小火车到尽头看海底观测站）。</p>
+                        <div class="info-cards">
+                            <div class="info-card"><span class="info-icon">🚗</span><div><h4>距离</h4><p>约 320km</p></div></div>
+                            <div class="info-card"><span class="info-icon">⏱️</span><div><h4>车程</h4><p>约 4 小时</p></div></div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Augusta+to+Perth" target="_blank" class="nav-link">📍 导航：奥古斯塔→珀斯</a>
+                    </div>
+                </div>
+                <div class="route-map-box" style="background: linear-gradient(135deg, #e6fffa, #b2f5ea); border-left-color: var(--forest);">
+                    <h4 style="color: #22543d;">🗺️ Day4 南线路线图</h4>
+                    <div class="route-segment"><div class="from-to">珀斯 → 巴瑟尔顿</div><div class="distance">220km</div><div class="time">2.5h</div></div>
+                    <div class="route-segment"><div class="from-to">巴瑟尔顿 → 奥古斯塔</div><div class="distance">100km</div><div class="time">1.5h</div></div>
+                    <div class="route-segment"><div class="from-to">奥古斯塔 → 玛格丽特河</div><div class="distance">40km</div><div class="time">40min</div></div>
+                    <div class="route-segment"><div class="from-to">玛格丽特河 → 珀斯</div><div class="distance">280km</div><div class="time">3.5h</div></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--forest);">📍 <a href="https://maps.google.com/?q=Perth+to+Augusta+Cape+Leeuwin+return" target="_blank" style="color: #22543d; text-decoration: underline;">南线完整路线 (Google Maps)</a></p>
+                </div>
+                
+                <h3 style="color: var(--forest); margin: 2rem 0 1rem; font-family: 'Noto Serif SC', serif;">📅 Day5：珀斯 Citywalk → ✈️ 18:25航班</h3>
+                <p style="color: #666; margin-bottom: 1rem; font-size: 0.9rem;">与方案B的Day5相同：国王公园 → 天鹅河 → 弗里曼特尔 → CBD购物 → 机场</p>
+                <div style="text-align:center; margin: 1.5rem 0;">
+                    <a href="#section-plan-b-day5" class="nav-link" style="background: var(--forest); display: inline-flex;">👆 查看方案B Day5 Citywalk 详细行程</a>
+                </div>
+                
+                <div class="route-map-box" style="background: linear-gradient(135deg, #e6fffa, #b2f5ea); border-left-color: var(--forest);">
+                    <h4 style="color: #22543d;">🗺️ 方案C 总里程对比</h4>
+                    <div class="route-segment"><div class="from-to">Day1</div><div class="distance">轮渡上岛</div><div class="time">几乎无车程</div></div>
+                    <div class="route-segment"><div class="from-to">Day2</div><div class="distance">珀斯→塞万提斯</div><div class="time">240km / 4h</div></div>
+                    <div class="route-segment"><div class="from-to">Day3</div><div class="distance">塞万提斯→珀斯</div><div class="time">200km / 3h</div></div>
+                    <div class="route-segment"><div class="from-to">Day4</div><div class="distance">珀斯→奥古斯塔往返</div><div class="time">540km / 7h</div></div>
+                    <div class="route-segment"><div class="from-to">Day5</div><div class="distance">珀斯市区→机场</div><div class="time">15km / 25min</div></div>
+                    <div class="route-segment" style="font-weight: 600; border-top: 2px solid var(--forest); padding-top: 0.75rem;"><div class="from-to">总计</div><div class="distance" style="color: var(--forest);">~995km</div><div class="time" style="color: var(--forest);">~14.5h</div></div>
+                </div>
+            </div>
+        </article>
+
         <!-- Gallery -->
         <section class="gallery-section">
             <h2>📸 经典瞬间预览</h2>
@@ -1151,8 +1309,8 @@
     </div>
 
     <footer class="footer">
-        <p>🌏 西澳珀斯北线5日终极攻略（优化版）</p>
-        <p>罗特内斯特岛Day1全天玩 · 一路向北不回头 · Day4住兰斯林Day5轻松赶航班</p>
+        <p>🌏 西澳珀斯南北线5日终极攻略（三方案）</p>
+        <p>罗特内斯特岛Day1全天玩 · 北线/南线/城市三方案 · Day5从容赶18:25航班</p>
         <p style="margin-top: 1rem; font-size: 0.8rem;">Made for your perfect WA journey</p>
     </footer>
 </body>
